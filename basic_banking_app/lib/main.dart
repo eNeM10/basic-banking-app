@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:basic_banking_app/screens/splashScreen.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -27,10 +29,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Container(),
-      ),
-    );
+    return SplashScreen();
   }
 }
