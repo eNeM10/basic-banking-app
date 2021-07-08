@@ -32,14 +32,17 @@ class _LandingScreenState extends State<LandingScreen> {
             child: CircularProgressIndicator(),
           )
         : Scaffold(
-            body: _widgetOptions.elementAt(_selectedIndex),
+            backgroundColor: kDarkBackground,
+            body: SafeArea(
+              child: _widgetOptions.elementAt(_selectedIndex),
+            ),
             bottomNavigationBar: Container(
               decoration: BoxDecoration(
                 color: Colors.black,
                 boxShadow: [
                   BoxShadow(
-                    blurRadius: 20,
-                    color: kDarkTextColorB.withOpacity(1),
+                    blurRadius: 10,
+                    color: Colors.black,
                   ),
                 ],
               ),

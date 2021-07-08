@@ -1,3 +1,4 @@
+import 'package:basic_banking_app/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:basic_banking_app/screens/splashScreen.dart';
@@ -12,7 +13,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.orange,
+        accentColor: Colors.orangeAccent,
+        backgroundColor: kDarkBackground,
+        brightness: Brightness.dark,
       ),
       home: HomePage(),
     );
