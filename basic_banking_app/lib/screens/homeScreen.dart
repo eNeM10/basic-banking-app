@@ -560,7 +560,7 @@ class LeftBorderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(5.0),
+      padding: const EdgeInsets.all(7.0),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.black,
@@ -568,7 +568,7 @@ class LeftBorderCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20.0),
           boxShadow: [
             BoxShadow(
-              blurRadius: 10,
+              blurRadius: 5,
               color: Colors.black,
             ),
           ],

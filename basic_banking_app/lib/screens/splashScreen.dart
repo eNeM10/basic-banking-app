@@ -33,9 +33,9 @@ class _SplashScreenState extends State<SplashScreen> {
     if (login == null || login == false) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          // builder: (context) => LoginScreen(),
-          //TODO: uncomment above line and remove below line
-          builder: (context) => LandingScreen(),
+          builder: (context) => LoginScreen(
+            prefs: prefs,
+          ),
         ),
       );
     } else {
