@@ -1,10 +1,9 @@
+import 'package:flutter/material.dart';
+
+import 'package:line_icons/line_icons.dart';
+
 import 'package:basic_banking_app/constants/colors.dart';
 import 'package:basic_banking_app/screens/landingScreen.dart';
-import 'package:flutter/material.dart';
-import 'package:line_icons/line_icon.dart';
-import 'dart:async';
-import 'package:line_icons/line_icons.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key, required this.prefs}) : super(key: key);

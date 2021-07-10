@@ -1,11 +1,13 @@
+import 'package:flutter/material.dart';
+
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:line_icons/line_icons.dart';
+
 import 'package:basic_banking_app/constants/colors.dart';
 import 'package:basic_banking_app/screens/allUsersScreen.dart';
 import 'package:basic_banking_app/screens/homeScreen.dart';
 import 'package:basic_banking_app/screens/profileScreen.dart';
 import 'package:basic_banking_app/screens/transactionHistoryScreen.dart';
-import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:line_icons/line_icons.dart';
 
 class LandingScreen extends StatefulWidget {
   const LandingScreen({Key? key}) : super(key: key);

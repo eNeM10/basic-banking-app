@@ -1,9 +1,11 @@
-import 'package:basic_banking_app/constants/colors.dart';
 import 'package:flutter/material.dart';
 
+import 'package:basic_banking_app/constants/colors.dart';
 import 'package:basic_banking_app/screens/splashScreen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(MyApp());
 }
 

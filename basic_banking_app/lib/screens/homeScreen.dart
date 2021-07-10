@@ -1,13 +1,14 @@
+import 'dart:math';
+
+import 'package:flutter/material.dart';
+
+import 'package:line_icons/line_icons.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+
 import 'package:basic_banking_app/constants/colors.dart';
 import 'package:basic_banking_app/models/ExpensesModel.dart';
 import 'package:basic_banking_app/models/IncomeExpenditureModel.dart';
 import 'package:basic_banking_app/models/QuotesModel.dart';
-import 'package:flutter/material.dart';
-import 'package:line_icons/line_icons.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
-import 'dart:math';
-
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -225,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               child: Icon(
                                 LineIcons.chevronRight,
-                                size: 50,
+                                size: 35,
                                 color: kDarkTextColorB,
                               ),
                             ),
@@ -387,8 +388,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                       child: SfCartesianChart(
                         palette: [
-                          Colors.blue.shade700,
-                          Colors.orange.shade800,
+                          kIncomeColor,
+                          kExpenseColor,
                         ],
                         plotAreaBorderColor: Colors.transparent,
                         primaryXAxis: CategoryAxis(
