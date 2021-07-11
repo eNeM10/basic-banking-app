@@ -25,7 +25,7 @@ String formatDateDayMonth(DateTime dateTime) {
 }
 
 String formatDateDayMonthYear(DateTime dateTime) {
-  return DateFormat('MMMM d, yy').format(dateTime);
+  return DateFormat('MMMM d, y').format(dateTime);
 }
 
 String getTransactionTime(DateTime dateTime) {

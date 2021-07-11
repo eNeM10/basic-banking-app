@@ -1,1 +1,2 @@
-String username = "davidbeckham";
+String username = 'davidbeckham';
+String currencySymbol = '\$';
