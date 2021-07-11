@@ -34,7 +34,7 @@ class DatabaseHelper {
   ];
 
   List<String> customerIDs = [
-    'leomessi',
+    'liomessi',
     'davidbeckham',
     'cristiano',
     'neymarjr',
@@ -61,7 +61,6 @@ class DatabaseHelper {
   }
 
   Future _onCreate(Database db, int version) async {
-    print('log 1');
     await db.execute('''
       CREATE TABLE customers(
         designation TEXT,
@@ -72,7 +71,7 @@ class DatabaseHelper {
         phone STRING
       )
     ''');
-    print('log 2');
+
     await db.execute('''
       CREATE TABLE transactions(
         txid TEXT,
@@ -82,7 +81,7 @@ class DatabaseHelper {
         date TEXT
       )
     ''');
-    print('log 3');
+
     await db.rawInsert('INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?)',
         ['Mr.', 'Lionel', 'Messi', 'liomessi', 3050000, randomPhoneNumbers[0]]);
     await db.rawInsert('INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?)', [
@@ -151,10 +150,8 @@ class DatabaseHelper {
       3570000,
       randomPhoneNumbers[9]
     ]);
-    print('log 4');
-    // await createTx(db);
+
     await populateTransactionsTable(db, 100);
-    print('log 5');
   }
 
   Future<int> populateTransactionsTable(Database db, numberOfTx) async {

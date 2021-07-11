@@ -28,6 +28,18 @@ String formatDateDayMonthYear(DateTime dateTime) {
   return DateFormat('MMMM d, y').format(dateTime);
 }
 
+String getTransactionTimeDetailed(DateTime dateTime) {
+  if (formatDateDayMonthYear(dateTime) ==
+      formatDateDayMonthYear(DateTime.now())) {
+    return 'Today, ${formatTimeHourMin(dateTime)}';
+  } else if (dateTime.year == DateTime.now().year) {
+    return '${formatDateDayMonth(dateTime)}, ${formatTimeHourMin(dateTime)}';
+  } else {
+    return '${formatDateDayMonthYear(dateTime)}, ${formatTimeHourMin(dateTime)}';
+  }
+}
+
+
 String getTransactionTime(DateTime dateTime) {
   if (formatDateDayMonthYear(dateTime) ==
       formatDateDayMonthYear(DateTime.now())) {

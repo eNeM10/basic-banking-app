@@ -52,7 +52,7 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
                   } else {
                     return ListView.builder(
                       itemBuilder: (context, index) {
-                        return transactionCardWidget(
+                        return TransactionCardWidget(
                           transaction: snapshot.data![index],
                         );
                       },
