@@ -1,4 +1,4 @@
-import 'package:basic_banking_app/screens/ProfilePopScreen.dart';
+import 'package:basic_banking_app/screens/secondary_screens/ProfilePopScreen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:progress_indicators/progress_indicators.dart';

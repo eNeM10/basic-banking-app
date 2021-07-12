@@ -1,6 +1,6 @@
 import 'package:basic_banking_app/models/CustomerModel.dart';
-import 'package:basic_banking_app/screens/ProfilePopScreen.dart';
-import 'package:basic_banking_app/screens/TransactionPopScreen.dart';
+import 'package:basic_banking_app/screens/secondary_screens/ProfilePopScreen.dart';
+import 'package:basic_banking_app/screens/secondary_screens/TransactionPopScreen.dart';
 import 'package:basic_banking_app/utils/Database.dart';
 import 'package:flutter/material.dart';
 

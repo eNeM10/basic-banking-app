@@ -18,6 +18,8 @@ dependencies:
   path: ^1.8.0
   path_provider: ^2.0.2
   progress_indicators: ^1.0.0
+  screenshot: ^1.2.1
+  share_plus: ^2.1.4
   shared_preferences: ^2.0.6
   sqflite: ^2.0.0+3
   syncfusion_flutter_charts: ^19.2.46
