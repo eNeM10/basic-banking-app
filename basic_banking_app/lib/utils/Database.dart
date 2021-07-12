@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:basic_banking_app/constants/data.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -251,6 +252,20 @@ class DatabaseHelper {
       orderBy: 'date DESC',
       where: 'fromid = ? OR toid = ?',
       whereArgs: [user, user],
+    );
+    List<TransactionModel> transactionList = transactions.isNotEmpty
+        ? transactions.map((c) => TransactionModel.fromJson(c)).toList()
+        : [];
+    return transactionList;
+  }
+
+  Future<List<TransactionModel>> getTransactionsBetweenUsers(String user) async {
+    Database db = await instance.database;
+    var transactions = await db.query(
+      'transactions',
+      orderBy: 'date DESC',
+      where: '(fromid = ? AND toid = ?) OR (fromid = ? AND toid = ?)',
+      whereArgs: [user, username, username, user],
     );
     List<TransactionModel> transactionList = transactions.isNotEmpty
         ? transactions.map((c) => TransactionModel.fromJson(c)).toList()

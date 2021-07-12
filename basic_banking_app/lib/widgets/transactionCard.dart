@@ -12,10 +12,13 @@ import 'package:basic_banking_app/models/TransactionModel.dart';
 import 'package:basic_banking_app/utils/TimeFormatter.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
+// ignore: must_be_immutable
 class TransactionCardWidget extends StatefulWidget {
-  const TransactionCardWidget({required this.transaction, Key? key})
+  TransactionCardWidget(
+      {required this.transaction, this.compact = false, Key? key})
       : super(key: key);
   final TransactionModel transaction;
+  late bool compact;
 
   @override
   _TransactionCardWidgetState createState() => _TransactionCardWidgetState();
@@ -25,6 +28,7 @@ class _TransactionCardWidgetState extends State<TransactionCardWidget> {
   @override
   Widget build(BuildContext context) {
     bool isExpense;
+    bool isCompact = widget.compact;
     String user;
     String amountInt = widget.transaction.amount.toInt().toString();
     String amountDec =
@@ -54,8 +58,8 @@ class _TransactionCardWidgetState extends State<TransactionCardWidget> {
         } else {
           userInfo = snapshot.data;
           return Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 8.0,
+            padding: EdgeInsets.symmetric(
+              horizontal: isCompact ? 16.0 : 8.0,
               vertical: 6.0,
             ),
             child: InkWell(
@@ -141,30 +145,34 @@ class _TransactionCardWidgetState extends State<TransactionCardWidget> {
                                     ),
                                   ],
                                 ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      '${userInfo!.designation} ',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                                    Text(
-                                      '${userInfo!.firstname} ',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                                    Text(
-                                      '${userInfo!.lastname} ',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                                  ],
+                                Container(
+                                  child: isCompact
+                                      ? Container()
+                                      : Row(
+                                          children: [
+                                            Text(
+                                              '${userInfo!.designation} ',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                            Text(
+                                              '${userInfo!.firstname} ',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                            Text(
+                                              '${userInfo!.lastname} ',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                 ),
                                 SizedBox(
-                                  height: 5,
+                                  height: isCompact? 1 : 5,
                                 ),
                                 Text(
                                   getTransactionTime(widget.transaction.date),
@@ -176,29 +184,31 @@ class _TransactionCardWidgetState extends State<TransactionCardWidget> {
                           ),
                         ],
                       ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        decoration: BoxDecoration(
-                          color: Colors.orangeAccent,
-                          shape: BoxShape.circle,
-                        ),
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => ProfilePopScreen(
-                                  username: snapshot.data!.id,
+                      isCompact
+                          ? Container()
+                          : Container(
+                              padding: EdgeInsets.symmetric(horizontal: 8.0),
+                              decoration: BoxDecoration(
+                                color: Colors.orangeAccent,
+                                shape: BoxShape.circle,
+                              ),
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => ProfilePopScreen(
+                                        user: snapshot.data!,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Icon(
+                                  LineIcons.user,
+                                  size: 45,
+                                  color: Colors.white,
                                 ),
                               ),
-                            );
-                          },
-                          child: Icon(
-                            LineIcons.user,
-                            size: 45,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
+                            ),
                     ],
                   ),
                 ),

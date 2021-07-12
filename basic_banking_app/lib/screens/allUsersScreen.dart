@@ -59,7 +59,7 @@ class _AllUsersScreenState extends State<AllUsersScreen> {
                           onTap: () => Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => ProfilePopScreen(
-                                username: snapshot.data![index].id,
+                                user: snapshot.data![index],
                               ),
                             ),
                           ),
