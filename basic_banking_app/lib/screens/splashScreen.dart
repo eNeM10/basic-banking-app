@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:basic_banking_app/constants/data.dart';
+import 'package:basic_banking_app/utils/Database.dart';
 import 'package:flutter/material.dart';
 
 import 'package:progress_indicators/progress_indicators.dart';
@@ -40,6 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       );
     } else {
+      DatabaseHelper.instance.getCustomerFromID(username);
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => LandingScreen(),

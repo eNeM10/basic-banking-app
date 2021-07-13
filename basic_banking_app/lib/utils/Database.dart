@@ -153,6 +153,7 @@ class DatabaseHelper {
     ]);
 
     await populateTransactionsTable(db, 100);
+    print('database created');
   }
 
   Future<int> populateTransactionsTable(Database db, numberOfTx) async {
@@ -183,6 +184,11 @@ class DatabaseHelper {
       date: randDate,
     );
 
+    return await db.insert('transactions', tx.toJson());
+  }
+
+  Future<int> makeTransaction(TransactionModel tx) async {
+    Database db = await instance.database;
     return await db.insert('transactions', tx.toJson());
   }
 
@@ -259,7 +265,8 @@ class DatabaseHelper {
     return transactionList;
   }
 
-  Future<List<TransactionModel>> getTransactionsBetweenUsers(String user) async {
+  Future<List<TransactionModel>> getTransactionsBetweenUsers(
+      String user) async {
     Database db = await instance.database;
     var transactions = await db.query(
       'transactions',

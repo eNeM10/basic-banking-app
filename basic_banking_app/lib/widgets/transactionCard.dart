@@ -34,7 +34,8 @@ class _TransactionCardWidgetState extends State<TransactionCardWidget> {
     String amountDec =
         ((widget.transaction.amount * 100) - (int.parse(amountInt) * 100))
             .toInt()
-            .toString();
+            .toString()
+            .padLeft(2, '0');
     if (widget.transaction.toId == username) {
       isExpense = false;
       user = widget.transaction.fromId;

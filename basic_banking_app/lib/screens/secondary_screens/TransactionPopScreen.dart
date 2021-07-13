@@ -33,11 +33,13 @@ class _TransactionPopScreenState extends State<TransactionPopScreen> {
     CustomerInfo? userInfo;
     late bool isExpense;
     late String user;
-    String amountInt = widget.transaction.amount.toInt().toString();
+    String amountInt =
+        widget.transaction.amount.toInt().toString();
     String amountDec =
         ((widget.transaction.amount * 100) - (int.parse(amountInt) * 100))
             .toInt()
-            .toString();
+            .toString()
+            .padLeft(2, '0');
     if (transaction.fromId == username) {
       user = transaction.toId;
       isExpense = true;
@@ -235,7 +237,7 @@ class _TransactionPopScreenState extends State<TransactionPopScreen> {
                               },
                               child: Icon(
                                 LineIcons.user,
-                                size: 60,
+                                size: 90,
                                 color: Colors.white,
                               ),
                             ),

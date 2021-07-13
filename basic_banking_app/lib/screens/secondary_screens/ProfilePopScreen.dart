@@ -2,9 +2,9 @@ import 'package:basic_banking_app/constants/colors.dart';
 import 'package:basic_banking_app/models/CustomerModel.dart';
 import 'package:basic_banking_app/models/TransactionModel.dart';
 import 'package:basic_banking_app/screens/secondary_screens/GetHelpScreen.dart';
-import 'package:basic_banking_app/screens/secondary_screens/MakePaymentScreen.dart';
 import 'package:basic_banking_app/screens/secondary_screens/SendFeedbackScreen.dart';
 import 'package:basic_banking_app/utils/Database.dart';
+import 'package:basic_banking_app/widgets/AddTxBtn.dart';
 import 'package:basic_banking_app/widgets/transactionCard.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
@@ -22,7 +22,9 @@ class _ProfilePopScreenState extends State<ProfilePopScreen> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     CustomerInfo user = widget.user;
+    int refreshCount = 1;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: kDarkBackground,
       appBar: AppBar(
         iconTheme: IconThemeData(
@@ -174,7 +176,12 @@ class _ProfilePopScreenState extends State<ProfilePopScreen> {
                             child: MaterialButton(
                               minWidth: 5,
                               shape: CircleBorder(),
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  refreshCount++;
+                                });
+                                print(refreshCount);
+                              },
                               child: Icon(
                                 LineIcons.syncIcon,
                                 color: Colors.white,
@@ -201,7 +208,7 @@ class _ProfilePopScreenState extends State<ProfilePopScreen> {
                         right: 4.0,
                       ),
                       child: SizedBox(
-                        height: height * 0.4,
+                        height: height * 0.45,
                         child: FutureBuilder<List<TransactionModel>>(
                           future: DatabaseHelper.instance
                               .getTransactionsBetweenUsers(user.id),
@@ -267,61 +274,19 @@ class _ProfilePopScreenState extends State<ProfilePopScreen> {
                   child: Row(
                     children: [
                       Expanded(
-                        child: MaterialButton(
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    MakePaymentScreen(user: user),
-                              ),
-                            );
-                          },
-                          color: kDarkTextColorB,
-                          elevation: 6,
-                          padding: EdgeInsets.all(8.0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                LineIcons.arrowUp,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text('Send Money  '),
-                            ],
-                          ),
+                        child: AddTxButton(
+                          toID: user.id,
+                          toName: user.firstname,
                         ),
                       ),
                       SizedBox(
                         width: 40,
                       ),
                       Expanded(
-                        child: MaterialButton(
-                          onPressed: () {
-                            //TODO: Implement Request Money
-                          },
-                          color: kDarkTextColorB,
-                          elevation: 6,
-                          padding: EdgeInsets.all(8.0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                LineIcons.arrowDown,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text('Request Money  '),
-                            ],
-                          ),
+                        child: AddTxButton(
+                          toID: user.id,
+                          toName: user.firstname,
+                          isRequest: true,
                         ),
                       ),
                     ],
