@@ -33,8 +33,7 @@ class _TransactionPopScreenState extends State<TransactionPopScreen> {
     CustomerInfo? userInfo;
     late bool isExpense;
     late String user;
-    String amountInt =
-        widget.transaction.amount.toInt().toString();
+    String amountInt = widget.transaction.amount.toInt().toString();
     String amountDec =
         ((widget.transaction.amount * 100) - (int.parse(amountInt) * 100))
             .toInt()

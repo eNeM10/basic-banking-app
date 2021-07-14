@@ -46,6 +46,34 @@ class DatabaseHelper {
     'ahegerberg',
     'liekemartens',
   ];
+  /*
+
+<a href="https://ibb.co/TBC1580"><img src="https://i.ibb.co/xS4YQjg/Ada-Hegerberg.jpg" alt="Ada-Hegerberg" border="0"></a>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/nzBRZHd/Alex-Morgan.jpg" alt="Alex-Morgan" border="0"></a>
+<a href="https://ibb.co/WD2nN72"><img src="https://i.ibb.co/pWL26NL/Christine-Sinclair.jpg" alt="Christine-Sinclair" border="0"></a>
+<a href="https://ibb.co/sJ3TY4m"><img src="https://i.ibb.co/1J2CWNv/Cristiano-Ronaldo.jpg" alt="Cristiano-Ronaldo" border="0"></a>
+<a href="https://ibb.co/GRVCVJP"><img src="https://i.ibb.co/XtzFz4J/David-Beckham.jpg" alt="David-Beckham" border="0"></a>
+<a href="https://ibb.co/7ymTKRs"><img src="https://i.ibb.co/mzWY4Xf/Lieke-Martens.jpg" alt="Lieke-Martens" border="0"></a>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/Wg4fjfx/Lionel-Messi.jpg" alt="Lionel-Messi" border="0"></a>
+<a href="https://ibb.co/Pt1mnGS"><img src="https://i.ibb.co/HXGFsTJ/Megan-Rapione.jpg" alt="Megan-Rapione" border="0"></a>
+<a href="https://ibb.co/0nQ4Npf"><img src="https://i.ibb.co/FhnZvkB/NeymarJr.jpg" alt="NeymarJr" border="0"></a>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/pdgtVmb/Zlatan-Ibrahimovic.jpg" alt="Zlatan-Ibrahimovic" border="0"></a><br /><a target='_blank' href='https://imgbb.com/'>picture upload site</a><br />
+
+
+  */
+
+  List<String> userProfileImages = [
+    'https://i.ibb.co/Wg4fjfx/Lionel-Messi.jpg',
+    'https://i.ibb.co/XtzFz4J/David-Beckham.jpg',
+    'https://i.ibb.co/1J2CWNv/Cristiano-Ronaldo.jpg',
+    'https://i.ibb.co/FhnZvkB/NeymarJr.jpg',
+    'https://i.ibb.co/pdgtVmb/Zlatan-Ibrahimovic.jpg',
+    'https://i.ibb.co/nzBRZHd/Alex-Morgan.jpg',
+    'https://i.ibb.co/pWL26NL/Christine-Sinclair.jpg',
+    'https://i.ibb.co/HXGFsTJ/Megan-Rapione.jpg',
+    'https://i.ibb.co/xS4YQjg/Ada-Hegerberg.jpg',
+    'https://i.ibb.co/mzWY4Xf/Lieke-Martens.jpg',
+  ];
 
   List list = List.generate(10, (i) => i);
 
@@ -69,7 +97,8 @@ class DatabaseHelper {
         lastname TEXT,
         id TEXT,
         balance DOUBLE,
-        phone STRING
+        phone STRING,
+        dpurl STRING
       )
     ''');
 
@@ -83,73 +112,95 @@ class DatabaseHelper {
       )
     ''');
 
-    await db.rawInsert('INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?)',
-        ['Mr.', 'Lionel', 'Messi', 'liomessi', 3050000, randomPhoneNumbers[0]]);
-    await db.rawInsert('INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?)', [
+    await db.rawInsert('INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?, ?)', [
+      'Mr.',
+      'Lionel',
+      'Messi',
+      'liomessi',
+      3050000,
+      randomPhoneNumbers[0],
+      userProfileImages[0],
+    ]);
+    await db.rawInsert('INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?, ?)', [
       'Mr.',
       'David',
       'Beckham',
       'davidbeckham',
       2500000,
-      randomPhoneNumbers[1]
+      randomPhoneNumbers[1],
+      userProfileImages[1],
     ]);
-    await db.rawInsert('INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?)', [
+    await db.rawInsert('INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?, ?)', [
       'Mr.',
       'Cristiano',
       'Ronaldo',
       'cristiano',
       4050000,
-      randomPhoneNumbers[2]
+      randomPhoneNumbers[2],
+      userProfileImages[2],
     ]);
-    await db.rawInsert('INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?)',
-        ['Mr.', 'Neymar', 'Jr.', 'neymarjr', 2050000, randomPhoneNumbers[3]]);
-    await db.rawInsert('INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?)', [
+    await db.rawInsert('INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?, ?)', [
+      'Mr.',
+      'Neymar',
+      'Jr.',
+      'neymarjr',
+      2050000,
+      randomPhoneNumbers[3],
+      userProfileImages[3],
+    ]);
+    await db.rawInsert('INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?, ?)', [
       'Mr.',
       'Zlatan',
       'Ibrahimovic',
       'iamzlatanibrahimovic',
       1850000,
-      randomPhoneNumbers[4]
+      randomPhoneNumbers[4],
+      userProfileImages[4],
     ]);
-    await db.rawInsert('INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?)', [
+    await db.rawInsert('INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?, ?)', [
       'Mrs.',
       'Alex',
       'Morgan',
       'alexmorgan13',
       1550000,
-      randomPhoneNumbers[5]
+      randomPhoneNumbers[5],
+      userProfileImages[5],
     ]);
-    await db.rawInsert('INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?)', [
+    await db.rawInsert('INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?, ?)', [
       'Ms.',
       'Christine',
       'Sinclair',
       'c_sinc12',
       1950000,
-      randomPhoneNumbers[6]
+      randomPhoneNumbers[6],
+      userProfileImages[6],
     ]);
-    await db.rawInsert('INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?)', [
+    await db.rawInsert('INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?, ?)', [
       'Mrs.',
       'Megan ',
       'Rapinoe',
       'mrapinoe',
       2550000,
-      randomPhoneNumbers[7]
+      randomPhoneNumbers[7],
+      userProfileImages[7],
     ]);
-    await db.rawInsert('INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?)', [
+    await db.rawInsert('INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?, ?)', [
       'Mrs.',
       'Ada',
       'Hegerberg',
       'ahegerberg',
       1850000,
-      randomPhoneNumbers[8]
+      randomPhoneNumbers[8],
+      userProfileImages[8],
     ]);
-    await db.rawInsert('INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?)', [
+    await db.rawInsert('INSERT INTO customers VALUES(?, ?, ?, ?, ?, ?, ?)', [
       'Ms.',
       'Lieke',
       'Martens',
       'liekemartens',
       3570000,
-      randomPhoneNumbers[9]
+      randomPhoneNumbers[9],
+      userProfileImages[9],
     ]);
 
     await populateTransactionsTable(db, 100);

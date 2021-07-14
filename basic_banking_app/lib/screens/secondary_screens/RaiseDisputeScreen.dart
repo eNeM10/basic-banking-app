@@ -3,7 +3,8 @@ import 'package:basic_banking_app/models/TransactionModel.dart';
 import 'package:flutter/material.dart';
 
 class RaiseDisputeScreen extends StatefulWidget {
-  const RaiseDisputeScreen({required this.transaction ,Key? key}) : super(key: key);
+  const RaiseDisputeScreen({required this.transaction, Key? key})
+      : super(key: key);
   final TransactionModel transaction;
   @override
   _RaiseDisputeScreenState createState() => _RaiseDisputeScreenState();

@@ -22,10 +22,17 @@ class _LandingScreenState extends State<LandingScreen> {
 
   List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
+    // HomeScreen(toAllUsers: openAllUsersScreen,),
     AllUsersScreen(),
     TransactionHistoryScreen(),
     ProfileScreen(),
   ];
+
+  void openAllUsersScreen() {
+    setState(() {
+      _selectedIndex = 1;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

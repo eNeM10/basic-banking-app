@@ -12,7 +12,11 @@ import 'package:basic_banking_app/models/IncomeExpenditureModel.dart';
 import 'package:basic_banking_app/models/QuotesModel.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({
+    // required this.toAllUsers,
+    Key? key,
+  }) : super(key: key);
+  // final Function toAllUsers;
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -182,26 +186,22 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       SmallProfileCard(
                         imageUrl:
-                          'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-img.instyle.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F640x768%2Fpublic%2Fimages%2F2018%2F10%2Fgettyimages-491521624.jpg%3Fitok%3D3pJk7w4F',
-                        
+                            'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-img.instyle.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F640x768%2Fpublic%2Fimages%2F2018%2F10%2Fgettyimages-491521624.jpg%3Fitok%3D3pJk7w4F',
                         name: 'Cristiano',
                       ),
                       SmallProfileCard(
                         imageUrl:
-                          'https://i.pinimg.com/originals/f4/89/02/f48902a53d8bca7ffa2ec909c807f151.jpg',
-                        
+                            'https://i.pinimg.com/originals/f4/89/02/f48902a53d8bca7ffa2ec909c807f151.jpg',
                         name: 'Neymar',
                       ),
                       SmallProfileCard(
                         imageUrl:
-                          'https://i.pinimg.com/originals/ce/5d/52/ce5d52d09fe55de051f657054056250d.jpg',
-                        
+                            'https://i.pinimg.com/originals/ce/5d/52/ce5d52d09fe55de051f657054056250d.jpg',
                         name: 'Zlatan',
                       ),
                       SmallProfileCard(
                         imageUrl:
-                          'https://imagesvcmeredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-img.instyle.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F640x768%2Fpublic%2Fimages%2F2018%2F10%2Fgettyimages-491521624.jpg%3Fitok%3D3pJk7w4F',
-                        
+                            'https://imagesvcmeredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-img.instyle.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F640x768%2Fpublic%2Fimages%2F2018%2F10%2Fgettyimages-491521624.jpg%3Fitok%3D3pJk7w4F',
                         name: 'Cristiano',
                       ),
                       MaterialButton(

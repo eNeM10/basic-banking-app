@@ -1,5 +1,5 @@
+import 'package:basic_banking_app/widgets/ProfileImageWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icons.dart';
 
 customerCardWidget({customer, onTap}) {
   return Padding(
@@ -32,9 +32,9 @@ customerCardWidget({customer, onTap}) {
                   color: Colors.orangeAccent,
                   shape: BoxShape.circle,
                 ),
-                child: Icon(
-                  LineIcons.userAlt,
-                  size: 50,
+                child: ProfileImageWidget(
+                  photoUrl: customer.dpurl,
+                  radius: 30,
                 ),
               ),
               Padding(

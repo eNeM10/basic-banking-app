@@ -12,6 +12,8 @@ import 'package:basic_banking_app/models/TransactionModel.dart';
 import 'package:basic_banking_app/utils/TimeFormatter.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
+import 'ProfileImageWidget.dart';
+
 // ignore: must_be_immutable
 class TransactionCardWidget extends StatefulWidget {
   TransactionCardWidget(
@@ -173,7 +175,7 @@ class _TransactionCardWidgetState extends State<TransactionCardWidget> {
                                         ),
                                 ),
                                 SizedBox(
-                                  height: isCompact? 1 : 5,
+                                  height: isCompact ? 1 : 5,
                                 ),
                                 Text(
                                   getTransactionTime(widget.transaction.date),
@@ -203,10 +205,9 @@ class _TransactionCardWidgetState extends State<TransactionCardWidget> {
                                     ),
                                   );
                                 },
-                                child: Icon(
-                                  LineIcons.user,
-                                  size: 45,
-                                  color: Colors.white,
+                                child: ProfileImageWidget(
+                                  photoUrl: userInfo!.dpurl,
+                                  radius: 30,
                                 ),
                               ),
                             ),

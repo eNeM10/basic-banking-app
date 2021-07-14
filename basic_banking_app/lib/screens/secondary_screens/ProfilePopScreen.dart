@@ -5,6 +5,7 @@ import 'package:basic_banking_app/screens/secondary_screens/GetHelpScreen.dart';
 import 'package:basic_banking_app/screens/secondary_screens/SendFeedbackScreen.dart';
 import 'package:basic_banking_app/utils/Database.dart';
 import 'package:basic_banking_app/widgets/AddTxBtn.dart';
+import 'package:basic_banking_app/widgets/ProfileImageWidget.dart';
 import 'package:basic_banking_app/widgets/transactionCard.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
@@ -96,10 +97,9 @@ class _ProfilePopScreenState extends State<ProfilePopScreen> {
                         color: Colors.orangeAccent,
                         shape: BoxShape.circle,
                       ),
-                      child: Icon(
-                        LineIcons.user,
-                        size: 90,
-                        color: Colors.white,
+                      child: ProfileImageWidget(
+                        photoUrl: user.dpurl,
+                        radius: 60,
                       ),
                     ),
                     SizedBox(

@@ -16,12 +16,12 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget> {
   Widget build(BuildContext context) {
     double radius = widget.radius;
     return CircleAvatar(
-      backgroundColor: Colors.orangeAccent[400],
+      backgroundColor: Colors.black,
       radius: widget.radius,
       child: ClipOval(
         child: FadeInImage.assetNetwork(
-          height: radius*2,
-          width: radius*2,
+          height: radius * 2,
+          width: radius * 2,
           fit: BoxFit.cover,
           placeholder: 'assets/images/Loader.gif',
           image: widget.photoUrl,
@@ -32,7 +32,7 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget> {
               child: Icon(
                 LineIcons.user,
                 color: Colors.black,
-                size: radius*2,
+                size: radius * 2,
               ),
             );
           },

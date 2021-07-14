@@ -10,11 +10,11 @@ Color kExpenseColor = Colors.orange.shade800;
 
 const Color backgroundColor = Color(0xFF191D1F);
 
-  /// Slightly lighter version of [backgroundColor].
+/// Slightly lighter version of [backgroundColor].
 const Color backgroundFadedColor = Color(0xFF191B1C);
 
-  /// Color used for cards and surfaces.
+/// Color used for cards and surfaces.
 const Color cardColor = Color(0xFF1F2426);
 
-  /// Accent color used in the application.
+/// Accent color used in the application.
 const Color accentColor = Color(0xFFef8354);

@@ -17,6 +17,7 @@ class CustomerInfo {
     required this.id,
     required this.balance,
     required this.phone,
+    required this.dpurl,
   });
 
   String designation;
@@ -25,6 +26,7 @@ class CustomerInfo {
   String id;
   double balance;
   String phone;
+  String dpurl;
 
   factory CustomerInfo.fromJson(Map<String, dynamic> json) => CustomerInfo(
         designation: json["designation"],
@@ -33,6 +35,7 @@ class CustomerInfo {
         id: json["id"],
         balance: json["balance"].toDouble(),
         phone: json["phone"],
+        dpurl: json["dpurl"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -42,5 +45,6 @@ class CustomerInfo {
         "id": id,
         "balance": balance,
         "phone": phone,
+        "dpurl": dpurl,
       };
 }

@@ -2,7 +2,7 @@ import 'package:basic_banking_app/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class GetHelpScreen extends StatefulWidget {
-  const GetHelpScreen({ Key? key }) : super(key: key);
+  const GetHelpScreen({Key? key}) : super(key: key);
 
   @override
   _GetHelpScreenState createState() => _GetHelpScreenState();

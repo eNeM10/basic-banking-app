@@ -39,7 +39,6 @@ String getTransactionTimeDetailed(DateTime dateTime) {
   }
 }
 
-
 String getTransactionTime(DateTime dateTime) {
   if (formatDateDayMonthYear(dateTime) ==
       formatDateDayMonthYear(DateTime.now())) {
