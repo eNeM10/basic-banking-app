@@ -3,7 +3,7 @@ import 'package:basic_banking_app/constants/data.dart';
 import 'package:basic_banking_app/models/TransactionModel.dart';
 import 'package:basic_banking_app/utils/Database.dart';
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icons.dart';
+import 'package:lottie/lottie.dart';
 import 'package:uuid/uuid.dart';
 
 class SendMoneyCard extends StatefulWidget {
@@ -196,15 +196,16 @@ class _SendMoneyCardState extends State<SendMoneyCard> {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
-                LineIcons.check,
-                size: 64,
-              ),
+              // Icon(
+              //   LineIcons.check,
+              //   size: 64,
+              // ),
+              Lottie.asset('assets/LottieFiles/finishdone.json', repeat: false),
               SizedBox(
                 height: 15,
               ),
               Text(
-                'Transaction Successful',
+                widget.isRequest ? 'Request Sent' : 'Transaction Successful',
                 style: TextStyle(fontSize: 24),
               )
             ],

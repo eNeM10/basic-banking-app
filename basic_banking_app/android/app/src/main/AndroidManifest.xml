@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.enem.basic_banking_app">
    <application
-        android:label="basic_banking_app"
+        android:label="MyBankApp"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

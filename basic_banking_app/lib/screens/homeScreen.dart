@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:basic_banking_app/widgets/ProfileImageWidget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:line_icons/line_icons.dart';
@@ -180,28 +181,28 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Row(
                     children: [
                       SmallProfileCard(
-                        image: NetworkImage(
+                        imageUrl:
                           'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-img.instyle.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F640x768%2Fpublic%2Fimages%2F2018%2F10%2Fgettyimages-491521624.jpg%3Fitok%3D3pJk7w4F',
-                        ),
+                        
                         name: 'Cristiano',
                       ),
                       SmallProfileCard(
-                        image: NetworkImage(
-                          'https://img.fifa.com/image/upload/t_s2/v1569269184/dlm0jxnr39c4o4ed0rhw.jpg',
-                        ),
-                        name: 'Lionel',
-                      ),
-                      SmallProfileCard(
-                        image: NetworkImage(
+                        imageUrl:
                           'https://i.pinimg.com/originals/f4/89/02/f48902a53d8bca7ffa2ec909c807f151.jpg',
-                        ),
+                        
                         name: 'Neymar',
                       ),
                       SmallProfileCard(
-                        image: NetworkImage(
+                        imageUrl:
                           'https://i.pinimg.com/originals/ce/5d/52/ce5d52d09fe55de051f657054056250d.jpg',
-                        ),
+                        
                         name: 'Zlatan',
+                      ),
+                      SmallProfileCard(
+                        imageUrl:
+                          'https://imagesvcmeredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-img.instyle.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F640x768%2Fpublic%2Fimages%2F2018%2F10%2Fgettyimages-491521624.jpg%3Fitok%3D3pJk7w4F',
+                        
+                        name: 'Cristiano',
                       ),
                       MaterialButton(
                         shape: CircleBorder(),
@@ -525,9 +526,9 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class SmallProfileCard extends StatelessWidget {
-  const SmallProfileCard({required this.image, required this.name});
+  const SmallProfileCard({required this.imageUrl, required this.name});
 
-  final ImageProvider image;
+  final String imageUrl;
   final String name;
 
   @override
@@ -536,10 +537,11 @@ class SmallProfileCard extends StatelessWidget {
       padding: EdgeInsets.all(15.0),
       child: Column(
         children: [
-          CircleAvatar(
-            radius: 35,
-            backgroundImage: image,
-          ),
+          // CircleAvatar(
+          //   radius: 35,
+          //   backgroundImage: image,
+          // ),
+          ProfileImageWidget(photoUrl: imageUrl, radius: 35),
           SizedBox(
             height: 5,
           ),

@@ -16,6 +16,7 @@ dependencies:
   google_nav_bar: ^5.0.5
   intl: ^0.17.0
   line_icons: ^2.0.0
+  lottie: ^1.1.0
   path: ^1.8.0
   path_provider: ^2.0.2
   progress_indicators: ^1.0.0
@@ -36,6 +37,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/LottieFiles/
 
   # fonts:
   #   - family: Schyler

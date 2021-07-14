@@ -22,6 +22,7 @@ class _ProfilePopScreenState extends State<ProfilePopScreen> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     CustomerInfo user = widget.user;
+    // ignore: unused_local_variable
     int refreshCount = 1;
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -180,7 +181,6 @@ class _ProfilePopScreenState extends State<ProfilePopScreen> {
                                 setState(() {
                                   refreshCount++;
                                 });
-                                print(refreshCount);
                               },
                               child: Icon(
                                 LineIcons.syncIcon,
