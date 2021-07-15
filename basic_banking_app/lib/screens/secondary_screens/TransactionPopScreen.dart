@@ -10,6 +10,7 @@ import 'package:basic_banking_app/screens/secondary_screens/RaiseDisputeScreen.d
 import 'package:basic_banking_app/screens/secondary_screens/SendFeedbackScreen.dart';
 import 'package:basic_banking_app/utils/Database.dart';
 import 'package:basic_banking_app/utils/TimeFormatter.dart';
+import 'package:basic_banking_app/widgets/ProfileImageWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:path_provider/path_provider.dart';
@@ -27,6 +28,7 @@ class TransactionPopScreen extends StatefulWidget {
 
 class _TransactionPopScreenState extends State<TransactionPopScreen> {
   final _screenshotController = ScreenshotController();
+
   @override
   Widget build(BuildContext context) {
     TransactionModel transaction = widget.transaction;
@@ -234,10 +236,9 @@ class _TransactionPopScreenState extends State<TransactionPopScreen> {
                                   ),
                                 );
                               },
-                              child: Icon(
-                                LineIcons.user,
-                                size: 90,
-                                color: Colors.white,
+                              child: ProfileImageWidget(
+                                photoUrl: userInfo!.dpurl,
+                                radius: 50,
                               ),
                             ),
                           ),

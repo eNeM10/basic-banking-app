@@ -272,6 +272,26 @@ class DatabaseHelper {
     return customerList[0];
   }
 
+  Future<String> getCustomerFirstName(id) async {
+    Database db = await instance.database;
+    var customers =
+        await db.query('customers', where: 'id = ?', whereArgs: ['$id']);
+    List<CustomerInfo> customerList = customers.isNotEmpty
+        ? customers.map((c) => CustomerInfo.fromJson(c)).toList()
+        : [];
+    return customerList[0].firstname;
+  }
+
+  Future<String> getCustomerPhotoURL(id) async {
+    Database db = await instance.database;
+    var customers =
+        await db.query('customers', where: 'id = ?', whereArgs: ['$id']);
+    List<CustomerInfo> customerList = customers.isNotEmpty
+        ? customers.map((c) => CustomerInfo.fromJson(c)).toList()
+        : [];
+    return customerList[0].dpurl;
+  }
+
   Future<int> add(CustomerInfo customerInfo) async {
     Database db = await instance.database;
     return await db.insert('customers', customerInfo.toJson());

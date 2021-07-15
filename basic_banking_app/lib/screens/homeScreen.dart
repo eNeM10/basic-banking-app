@@ -1,28 +1,88 @@
 import 'dart:math';
 
-import 'package:basic_banking_app/widgets/ProfileImageWidget.dart';
 import 'package:flutter/material.dart';
 
-import 'package:line_icons/line_icons.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
-
 import 'package:basic_banking_app/constants/colors.dart';
+import 'package:basic_banking_app/constants/data.dart';
+import 'package:basic_banking_app/models/CustomerModel.dart';
 import 'package:basic_banking_app/models/ExpensesModel.dart';
 import 'package:basic_banking_app/models/IncomeExpenditureModel.dart';
+import 'package:basic_banking_app/models/TransactionModel.dart';
 import 'package:basic_banking_app/models/QuotesModel.dart';
+import 'package:basic_banking_app/screens/landingScreen.dart';
+import 'package:basic_banking_app/screens/secondary_screens/ProfilePopScreen.dart';
+import 'package:basic_banking_app/utils/Database.dart';
+import 'package:basic_banking_app/utils/TransactionsHelper.dart';
+import 'package:basic_banking_app/widgets/ProfileImageWidget.dart';
+
+import 'package:line_icons/line_icons.dart';
+import 'package:progress_indicators/progress_indicators.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
-    // required this.toAllUsers,
     Key? key,
   }) : super(key: key);
-  // final Function toAllUsers;
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool loading = false;
+  List<CustomerInfo> allUsers = [];
+  List<TransactionModel> allUserTx = [];
+  List<Widget> smallProfileCards = [];
+
+  @override
+  void initState() {
+    getTopUsers(numberOfUsers: 5);
+    super.initState();
+  }
+
+  getTopUsers({required int numberOfUsers}) async {
+    setState(() {
+      loading = true;
+    });
+
+    allUsers = await DatabaseHelper.instance.getCustomers(username);
+    allUserTx = await DatabaseHelper.instance.getTransactions(username);
+
+    List<String> userIDsTransactedWith = [];
+    List<String> userIDsByFrequncy = [];
+
+    for (TransactionModel tx in allUserTx) {
+      if (tx.toId == username) {
+        userIDsTransactedWith.add(tx.fromId);
+      } else {
+        userIDsTransactedWith.add(tx.toId);
+      }
+    }
+
+    TransactionsHelper tf = new TransactionsHelper();
+    userIDsByFrequncy = tf.getUsersByFrequency(
+      listOfUsers: allUsers,
+      userIDs: userIDsTransactedWith,
+    );
+
+    for (int i = 0; i < numberOfUsers; i++) {
+      for (CustomerInfo user in allUsers) {
+        if (userIDsByFrequncy[i] == user.id) {
+          smallProfileCards.add(
+            SmallProfileCard(
+              userInfo: user,
+            ),
+          );
+          break;
+        }
+      }
+    }
+
+    setState(() {
+      loading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Random random = new Random();
@@ -80,357 +140,444 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final QuotesModel quote = quotes[random.nextInt(10)];
 
-    return Container(
-      color: kDarkBackground,
-      child: Padding(
-        padding: const EdgeInsets.only(
-          left: 10.0,
-          right: 10.0,
-        ),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      'Good Morning,',
-                      style: TextStyle(color: kDarkTextColor1, fontSize: 24),
-                    ),
-                    SizedBox(
-                      height: 5.0,
-                    ),
-                    Text(
-                      'Mr. Beckham',
-                      style: TextStyle(color: kDarkTextColorB, fontSize: 48),
-                    ),
-                  ],
-                ),
+    return loading
+        ? Center(
+            child: JumpingDotsProgressIndicator(),
+          )
+        : Container(
+            color: kDarkBackground,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: 10.0,
+                right: 10.0,
               ),
-              SizedBox(
-                height: 50,
-              ),
-              LeftBorderCard(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Balance',
-                          style: TextStyle(
-                            color: kDarkTextColorB,
-                            fontSize: 24,
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 20,
                           ),
-                        ),
-                        Container(
-                          width: 55,
-                          child: MaterialButton(
-                            shape: CircleBorder(),
-                            onPressed: () {},
-                            color: Colors.black,
-                            child: Icon(
-                              LineIcons.syncIcon,
-                              color: Colors.white,
-                            ),
+                          Text(
+                            'Good Morning,',
+                            style:
+                                TextStyle(color: kDarkTextColor1, fontSize: 24),
                           ),
-                        ),
-                      ],
+                          SizedBox(
+                            height: 5.0,
+                          ),
+                          Text(
+                            'Mr. Beckham',
+                            style:
+                                TextStyle(color: kDarkTextColorB, fontSize: 48),
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(
-                      height: 30,
+                      height: 50,
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                      textBaseline: TextBaseline.alphabetic,
-                      children: [
-                        Text(
-                          '1,985,647',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 36,
-                          ),
-                        ),
-                        Text(
-                          '.59',
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(0.9),
-                            fontSize: 24,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 25,
-                        ),
-                        Text(
-                          'USD',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      SmallProfileCard(
-                        imageUrl:
-                            'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-img.instyle.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F640x768%2Fpublic%2Fimages%2F2018%2F10%2Fgettyimages-491521624.jpg%3Fitok%3D3pJk7w4F',
-                        name: 'Cristiano',
-                      ),
-                      SmallProfileCard(
-                        imageUrl:
-                            'https://i.pinimg.com/originals/f4/89/02/f48902a53d8bca7ffa2ec909c807f151.jpg',
-                        name: 'Neymar',
-                      ),
-                      SmallProfileCard(
-                        imageUrl:
-                            'https://i.pinimg.com/originals/ce/5d/52/ce5d52d09fe55de051f657054056250d.jpg',
-                        name: 'Zlatan',
-                      ),
-                      SmallProfileCard(
-                        imageUrl:
-                            'https://imagesvcmeredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-img.instyle.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F640x768%2Fpublic%2Fimages%2F2018%2F10%2Fgettyimages-491521624.jpg%3Fitok%3D3pJk7w4F',
-                        name: 'Cristiano',
-                      ),
-                      MaterialButton(
-                        shape: CircleBorder(),
-                        minWidth: 70.0,
-                        onPressed: () {},
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 70,
-                              height: 70,
-                              decoration: BoxDecoration(
-                                color: Colors.white12,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(35.0),
+                    LeftBorderCard(
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Balance',
+                                style: TextStyle(
+                                  color: kDarkTextColorB,
+                                  fontSize: 24,
                                 ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 10,
-                                    color: Colors.black,
+                              ),
+                              Container(
+                                width: 55,
+                                child: MaterialButton(
+                                  shape: CircleBorder(),
+                                  onPressed: () {},
+                                  color: Colors.black,
+                                  child: Icon(
+                                    LineIcons.syncIcon,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            children: [
+                              Text(
+                                '1,985,647',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 36,
+                                ),
+                              ),
+                              Text(
+                                '.59',
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(0.9),
+                                  fontSize: 24,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 25,
+                              ),
+                              Text(
+                                'USD',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 30,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            Row(
+                              children: smallProfileCards,
+                            ),
+                            MaterialButton(
+                              shape: CircleBorder(),
+                              minWidth: 70.0,
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        LandingScreen(index: 1),
+                                  ),
+                                );
+                              },
+                              child: Column(
+                                children: [
+                                  Container(
+                                    width: 70,
+                                    height: 70,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white12,
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(35.0),
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          blurRadius: 10,
+                                          color: Colors.black,
+                                        ),
+                                      ],
+                                    ),
+                                    child: Icon(
+                                      LineIcons.chevronRight,
+                                      size: 35,
+                                      color: kDarkTextColorB,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    'See All',
+                                    style: TextStyle(color: kDarkTextColor2),
                                   ),
                                 ],
-                              ),
-                              child: Icon(
-                                LineIcons.chevronRight,
-                                size: 35,
-                                color: kDarkTextColorB,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              'See All',
-                              style: TextStyle(color: kDarkTextColor2),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 3,
-                    child: LeftBorderCard(
-                      child: SizedBox(
-                        height: 150,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Rewards',
-                              style: TextStyle(
-                                color: kDarkTextColorB,
-                                fontSize: 24,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 16.0),
-                              child: Center(
-                                child: Row(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.baseline,
-                                  textBaseline: TextBaseline.alphabetic,
-                                  children: [
-                                    Text(
-                                      '1,205',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 30,
-                                      ),
-                                    ),
-                                    Text(
-                                      '.50',
-                                      style: TextStyle(
-                                        color: Colors.white.withOpacity(0.9),
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                    Text(
-                                      ' USD',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 25,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  right: 16.0, bottom: 10),
-                              child: Center(
-                                child: Text(
-                                  'Rewards Earned',
-                                  style: TextStyle(
-                                    color: kDarkTextColor2,
-                                    fontSize: 14,
-                                  ),
-                                ),
                               ),
                             )
                           ],
                         ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: LeftBorderCard(
-                      child: SizedBox(
-                        height: 150,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Bills',
-                              style: TextStyle(
-                                color: kDarkTextColorB,
-                                fontSize: 24,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 16.0),
-                              child: Center(
-                                child: Text(
-                                  '3',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 48,
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: LeftBorderCard(
+                            child: SizedBox(
+                              height: 150,
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Rewards',
+                                    style: TextStyle(
+                                      color: kDarkTextColorB,
+                                      fontSize: 24,
+                                    ),
                                   ),
-                                ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 16.0),
+                                    child: Center(
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.baseline,
+                                        textBaseline: TextBaseline.alphabetic,
+                                        children: [
+                                          Text(
+                                            '1,205',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 30,
+                                            ),
+                                          ),
+                                          Text(
+                                            '.50',
+                                            style: TextStyle(
+                                              color:
+                                                  Colors.white.withOpacity(0.9),
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                          Text(
+                                            ' USD',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 25,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 16.0, bottom: 10),
+                                    child: Center(
+                                      child: Text(
+                                        'Rewards Earned',
+                                        style: TextStyle(
+                                          color: kDarkTextColor2,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
-                            Padding(
+                          ),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: LeftBorderCard(
+                            child: SizedBox(
+                              height: 150,
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Bills',
+                                    style: TextStyle(
+                                      color: kDarkTextColorB,
+                                      fontSize: 24,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 16.0),
+                                    child: Center(
+                                      child: Text(
+                                        '3',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 48,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 16.0, bottom: 10),
+                                    child: Center(
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            'bills due',
+                                            style: TextStyle(
+                                              color: kDarkTextColor2,
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                          Text(
+                                            'this week',
+                                            style: TextStyle(
+                                              color: kDarkTextColor2,
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    LeftBorderCard(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'I&E Overview',
+                            style: TextStyle(
+                              color: kDarkTextColorB,
+                              fontSize: 24,
+                            ),
+                          ),
+                          Container(
+                            child: SfCartesianChart(
+                              palette: [
+                                kIncomeColor,
+                                kExpenseColor,
+                              ],
+                              plotAreaBorderColor: Colors.transparent,
+                              primaryXAxis: CategoryAxis(
+                                  isVisible: true,
+                                  axisLine: AxisLine(
+                                    color: Colors.transparent,
+                                  ),
+                                  majorGridLines:
+                                      MajorGridLines(color: Colors.transparent),
+                                  minorGridLines:
+                                      MinorGridLines(color: Colors.transparent),
+                                  majorTickLines: MajorTickLines(
+                                      color: Colors.transparent)),
+                              primaryYAxis: NumericAxis(
+                                isVisible: false,
+                              ),
+                              series: <CartesianSeries>[
+                                ColumnSeries<IncomeExpenditureModel, String>(
+                                  dataSource: barChartData,
+                                  xValueMapper:
+                                      (IncomeExpenditureModel data, _) =>
+                                          data.month,
+                                  yValueMapper:
+                                      (IncomeExpenditureModel data, _) =>
+                                          data.income,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    topRight: Radius.circular(10),
+                                  ),
+                                  spacing: 0.2,
+                                ),
+                                ColumnSeries<IncomeExpenditureModel, String>(
+                                  dataSource: barChartData,
+                                  xValueMapper:
+                                      (IncomeExpenditureModel data, _) =>
+                                          data.month,
+                                  yValueMapper:
+                                      (IncomeExpenditureModel data, _) =>
+                                          data.expenditure,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    topRight: Radius.circular(10),
+                                  ),
+                                  spacing: 0.2,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    LeftBorderCard(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Expenses',
+                            style: TextStyle(
+                              color: kDarkTextColorB,
+                              fontSize: 24,
+                            ),
+                          ),
+                          Container(
+                            child: SfCircularChart(
+                              legend: Legend(
+                                alignment: ChartAlignment.far,
+                                isVisible: true,
+                                textStyle: TextStyle(
+                                  fontSize: 10,
+                                ),
+                              ),
+                              series: <CircularSeries>[
+                                PieSeries<ExpensesModel, String>(
+                                  dataSource: pieChartData,
+                                  xValueMapper: (ExpensesModel data, _) =>
+                                      data.category,
+                                  yValueMapper: (ExpensesModel data, _) =>
+                                      data.amount,
+                                  pointRadiusMapper: (ExpensesModel data, _) =>
+                                      data.size,
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 25,
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Text(
+                              quote.quote,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: kDarkTextColor2,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Padding(
                               padding: const EdgeInsets.only(
-                                  right: 16.0, bottom: 10),
-                              child: Center(
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      'bills due',
-                                      style: TextStyle(
-                                        color: kDarkTextColor2,
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                    Text(
-                                      'this week',
-                                      style: TextStyle(
-                                        color: kDarkTextColor2,
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                  ],
+                                right: 8.0,
+                                bottom: 8.0,
+                              ),
+                              child: Text(
+                                '- ${quote.author}',
+                                style: TextStyle(
+                                  color: kDarkTextColor2,
+                                  fontSize: 14,
                                 ),
+                                textAlign: TextAlign.end,
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              LeftBorderCard(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'I&E Overview',
-                      style: TextStyle(
-                        color: kDarkTextColorB,
-                        fontSize: 24,
-                      ),
-                    ),
-                    Container(
-                      child: SfCartesianChart(
-                        palette: [
-                          kIncomeColor,
-                          kExpenseColor,
-                        ],
-                        plotAreaBorderColor: Colors.transparent,
-                        primaryXAxis: CategoryAxis(
-                            isVisible: true,
-                            axisLine: AxisLine(
-                              color: Colors.transparent,
-                            ),
-                            majorGridLines:
-                                MajorGridLines(color: Colors.transparent),
-                            minorGridLines:
-                                MinorGridLines(color: Colors.transparent),
-                            majorTickLines:
-                                MajorTickLines(color: Colors.transparent)),
-                        primaryYAxis: NumericAxis(
-                          isVisible: false,
-                        ),
-                        series: <CartesianSeries>[
-                          ColumnSeries<IncomeExpenditureModel, String>(
-                            dataSource: barChartData,
-                            xValueMapper: (IncomeExpenditureModel data, _) =>
-                                data.month,
-                            yValueMapper: (IncomeExpenditureModel data, _) =>
-                                data.income,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10),
-                            ),
-                            spacing: 0.2,
                           ),
-                          ColumnSeries<IncomeExpenditureModel, String>(
-                            dataSource: barChartData,
-                            xValueMapper: (IncomeExpenditureModel data, _) =>
-                                data.month,
-                            yValueMapper: (IncomeExpenditureModel data, _) =>
-                                data.expenditure,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10),
-                            ),
-                            spacing: 0.2,
+                          SizedBox(
+                            height: 15,
                           ),
                         ],
                       ),
@@ -438,118 +585,46 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              LeftBorderCard(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Expenses',
-                      style: TextStyle(
-                        color: kDarkTextColorB,
-                        fontSize: 24,
-                      ),
-                    ),
-                    Container(
-                      child: SfCircularChart(
-                        legend: Legend(
-                          alignment: ChartAlignment.far,
-                          isVisible: true,
-                          textStyle: TextStyle(
-                            fontSize: 10,
-                          ),
-                        ),
-                        series: <CircularSeries>[
-                          PieSeries<ExpensesModel, String>(
-                            dataSource: pieChartData,
-                            xValueMapper: (ExpensesModel data, _) =>
-                                data.category,
-                            yValueMapper: (ExpensesModel data, _) =>
-                                data.amount,
-                            pointRadiusMapper: (ExpensesModel data, _) =>
-                                data.size,
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 25,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Text(
-                        quote.quote,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: kDarkTextColor2,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          right: 8.0,
-                          bottom: 8.0,
-                        ),
-                        child: Text(
-                          '- ${quote.author}',
-                          style: TextStyle(
-                            color: kDarkTextColor2,
-                            fontSize: 14,
-                          ),
-                          textAlign: TextAlign.end,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
   }
 }
 
 class SmallProfileCard extends StatelessWidget {
-  const SmallProfileCard({required this.imageUrl, required this.name});
+  const SmallProfileCard({required this.userInfo});
 
-  final String imageUrl;
-  final String name;
+  final CustomerInfo userInfo;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(15.0),
-      child: Column(
-        children: [
-          // CircleAvatar(
-          //   radius: 35,
-          //   backgroundImage: image,
-          // ),
-          ProfileImageWidget(photoUrl: imageUrl, radius: 35),
-          SizedBox(
-            height: 5,
-          ),
-          Text(
-            name,
-            style: TextStyle(color: kDarkTextColor2),
-          ),
-        ],
+      child: InkWell(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => ProfilePopScreen(
+                user: userInfo,
+              ),
+            ),
+          );
+        },
+        child: Column(
+          children: [
+            // CircleAvatar(
+            //   radius: 35,
+            //   backgroundImage: image,
+            // ),
+            ProfileImageWidget(photoUrl: userInfo.dpurl, radius: 35),
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              userInfo.firstname,
+              style: TextStyle(color: kDarkTextColor2),
+            ),
+          ],
+        ),
       ),
     );
   }

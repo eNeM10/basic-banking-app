@@ -45,7 +45,9 @@ class _SplashScreenState extends State<SplashScreen> {
       DatabaseHelper.instance.getCustomerFromID(username);
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => LandingScreen(),
+          builder: (context) => LandingScreen(
+            index: 0,
+          ),
         ),
       );
     }

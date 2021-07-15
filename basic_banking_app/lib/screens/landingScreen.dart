@@ -10,8 +10,8 @@ import 'package:basic_banking_app/screens/profileScreen.dart';
 import 'package:basic_banking_app/screens/transactionHistoryScreen.dart';
 
 class LandingScreen extends StatefulWidget {
-  const LandingScreen({Key? key}) : super(key: key);
-
+  const LandingScreen({required this.index});
+  final int index;
   @override
   _LandingScreenState createState() => _LandingScreenState();
 }
@@ -32,6 +32,12 @@ class _LandingScreenState extends State<LandingScreen> {
     setState(() {
       _selectedIndex = 1;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.index;
   }
 
   @override
