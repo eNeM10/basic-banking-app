@@ -6,6 +6,7 @@ import 'package:basic_banking_app/widgets/ProfileImageWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:progress_indicators/progress_indicators.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -35,6 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             );
           } else {
             return Column(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -60,6 +62,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: 75,
                 ),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 8.0),
@@ -112,6 +117,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     color: Colors.white,
                     fontSize: 26,
                   ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  userInfo.data!.id,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+                SizedBox(
+                  height: 75,
+                ),
+                QrImage(
+                  data: userInfo.data!.id,
+                  version: QrVersions.auto,
+                  size: 200,
+                  foregroundColor: Colors.white,
+                  embeddedImage: AssetImage('assets/images/Logo.png'),
+                  embeddedImageStyle: QrEmbeddedImageStyle(),
+                ),
+                SizedBox(
+                  height: 90,
+                ),
+                Column(
+                  children: [
+                    Text(
+                      'Made by eNeMKreates',
+                      style: TextStyle(color: kDarkTextColor2),
+                    ),
+                    Text(
+                      'Ver 1.0.0',
+                      style: TextStyle(color: kDarkTextColor2),
+                    ),
+                  ],
                 ),
               ],
             );
