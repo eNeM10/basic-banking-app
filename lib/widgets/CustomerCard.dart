@@ -1,5 +1,6 @@
-import 'package:basic_banking_app/widgets/ProfileImageWidget.dart';
 import 'package:flutter/material.dart';
+
+import 'package:basic_banking_app/widgets/ProfileImageWidget.dart';
 
 customerCardWidget({customer, onTap}) {
   return Padding(

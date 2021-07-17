@@ -1,6 +1,6 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
+
 
 import 'package:basic_banking_app/constants/colors.dart';
 import 'package:basic_banking_app/constants/data.dart';
@@ -13,10 +13,10 @@ import 'package:basic_banking_app/screens/landingScreen.dart';
 import 'package:basic_banking_app/screens/secondary_screens/ProfilePopScreen.dart';
 import 'package:basic_banking_app/utils/Database.dart';
 import 'package:basic_banking_app/utils/TransactionsHelper.dart';
+import 'package:basic_banking_app/widgets/JumpingDots.dart';
 import 'package:basic_banking_app/widgets/ProfileImageWidget.dart';
 
 import 'package:line_icons/line_icons.dart';
-import 'package:progress_indicators/progress_indicators.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -145,445 +145,454 @@ class _HomeScreenState extends State<HomeScreen> {
             child: JumpingDotsProgressIndicator(),
           )
         : Container(
-            color: kDarkBackground,
+            color: kBackgroundColorDark,
             child: Padding(
               padding: const EdgeInsets.only(
                 left: 10.0,
                 right: 10.0,
               ),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            'Good Morning,',
-                            style:
-                                TextStyle(color: kDarkTextColor1, fontSize: 24),
-                          ),
-                          SizedBox(
-                            height: 5.0,
-                          ),
-                          Text(
-                            'Mr. Beckham',
-                            style:
-                                TextStyle(color: kDarkTextColorB, fontSize: 48),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    LeftBorderCard(
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Balance',
-                                style: TextStyle(
-                                  color: kDarkTextColorB,
-                                  fontSize: 24,
-                                ),
-                              ),
-                              Container(
-                                width: 55,
-                                child: MaterialButton(
-                                  shape: CircleBorder(),
-                                  onPressed: () {},
-                                  color: Colors.black,
-                                  child: Icon(
-                                    LineIcons.syncIcon,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.baseline,
-                            textBaseline: TextBaseline.alphabetic,
-                            children: [
-                              Text(
-                                '1,985,647',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 36,
-                                ),
-                              ),
-                              Text(
-                                '.59',
-                                style: TextStyle(
-                                  color: Colors.white.withOpacity(0.9),
-                                  fontSize: 24,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 25,
-                              ),
-                              Text(
-                                'USD',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            Row(
-                              children: smallProfileCards,
-                            ),
-                            MaterialButton(
-                              shape: CircleBorder(),
-                              minWidth: 70.0,
-                              onPressed: () {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        LandingScreen(index: 1),
-                                  ),
-                                );
-                              },
-                              child: Column(
-                                children: [
-                                  Container(
-                                    width: 70,
-                                    height: 70,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white12,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(35.0),
-                                      ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          blurRadius: 10,
-                                          color: Colors.black,
-                                        ),
-                                      ],
-                                    ),
-                                    child: Icon(
-                                      LineIcons.chevronRight,
-                                      size: 35,
-                                      color: kDarkTextColorB,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    'See All',
-                                    style: TextStyle(color: kDarkTextColor2),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    Row(
+              child: ListView(
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          flex: 3,
-                          child: LeftBorderCard(
-                            child: SizedBox(
-                              height: 150,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Rewards',
-                                    style: TextStyle(
-                                      color: kDarkTextColorB,
-                                      fontSize: 24,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 16.0),
-                                    child: Center(
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.baseline,
-                                        textBaseline: TextBaseline.alphabetic,
-                                        children: [
-                                          Text(
-                                            '1,205',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 30,
-                                            ),
-                                          ),
-                                          Text(
-                                            '.50',
-                                            style: TextStyle(
-                                              color:
-                                                  Colors.white.withOpacity(0.9),
-                                              fontSize: 20,
-                                            ),
-                                          ),
-                                          Text(
-                                            ' USD',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 25,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 16.0, bottom: 10),
-                                    child: Center(
-                                      child: Text(
-                                        'Rewards Earned',
-                                        style: TextStyle(
-                                          color: kDarkTextColor2,
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          'Good Morning,',
+                          style: TextStyle(
+                            color: kPrimaryTextColorDark,
+                            fontSize: 24,
                           ),
                         ),
-                        Expanded(
-                          flex: 2,
-                          child: LeftBorderCard(
-                            child: SizedBox(
-                              height: 150,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Bills',
-                                    style: TextStyle(
-                                      color: kDarkTextColorB,
-                                      fontSize: 24,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 16.0),
-                                    child: Center(
-                                      child: Text(
-                                        '3',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 48,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 16.0, bottom: 10),
-                                    child: Center(
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            'bills due',
-                                            style: TextStyle(
-                                              color: kDarkTextColor2,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                          Text(
-                                            'this week',
-                                            style: TextStyle(
-                                              color: kDarkTextColor2,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Text(
+                          'Mr. Beckham',
+                          style: TextStyle(
+                            color: kHeadTextColorDark,
+                            fontSize: 48,
                           ),
                         ),
                       ],
                     ),
-                    LeftBorderCard(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'I&E Overview',
-                            style: TextStyle(
-                              color: kDarkTextColorB,
-                              fontSize: 24,
-                            ),
-                          ),
-                          Container(
-                            child: SfCartesianChart(
-                              palette: [
-                                kIncomeColor,
-                                kExpenseColor,
-                              ],
-                              plotAreaBorderColor: Colors.transparent,
-                              primaryXAxis: CategoryAxis(
-                                  isVisible: true,
-                                  axisLine: AxisLine(
-                                    color: Colors.transparent,
-                                  ),
-                                  majorGridLines:
-                                      MajorGridLines(color: Colors.transparent),
-                                  minorGridLines:
-                                      MinorGridLines(color: Colors.transparent),
-                                  majorTickLines: MajorTickLines(
-                                      color: Colors.transparent)),
-                              primaryYAxis: NumericAxis(
-                                isVisible: false,
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  LeftBorderCard(
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Balance',
+                              style: TextStyle(
+                                color: kHeadTextColorDark,
+                                fontSize: 24,
                               ),
-                              series: <CartesianSeries>[
-                                ColumnSeries<IncomeExpenditureModel, String>(
-                                  dataSource: barChartData,
-                                  xValueMapper:
-                                      (IncomeExpenditureModel data, _) =>
-                                          data.month,
-                                  yValueMapper:
-                                      (IncomeExpenditureModel data, _) =>
-                                          data.income,
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    topRight: Radius.circular(10),
-                                  ),
-                                  spacing: 0.2,
+                            ),
+                            Container(
+                              width: 55,
+                              child: MaterialButton(
+                                shape: CircleBorder(),
+                                onPressed: () {},
+                                color: Colors.transparent,
+                                child: Icon(
+                                  LineIcons.syncIcon,
+                                  color: kPrimaryTextColorDark,
                                 ),
-                                ColumnSeries<IncomeExpenditureModel, String>(
-                                  dataSource: barChartData,
-                                  xValueMapper:
-                                      (IncomeExpenditureModel data, _) =>
-                                          data.month,
-                                  yValueMapper:
-                                      (IncomeExpenditureModel data, _) =>
-                                          data.expenditure,
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    topRight: Radius.circular(10),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Text(
+                              '1,985,647',
+                              style: TextStyle(
+                                color: kPrimaryTextColorDark,
+                                fontSize: 36,
+                              ),
+                            ),
+                            Text(
+                              '.59',
+                              style: TextStyle(
+                                color: kPrimaryTextColorDark,
+                                fontSize: 24,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 25,
+                            ),
+                            Text(
+                              'USD',
+                              style: TextStyle(
+                                color: kPrimaryTextColorDark,
+                                fontSize: 30,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          Row(
+                            children: smallProfileCards,
+                          ),
+                          MaterialButton(
+                            shape: CircleBorder(),
+                            minWidth: 70.0,
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      LandingScreen(index: 1),
+                                ),
+                              );
+                            },
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: 70,
+                                  height: 70,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white12,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(35.0),
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 10,
+                                        color: Colors.black,
+                                      ),
+                                    ],
                                   ),
-                                  spacing: 0.2,
+                                  child: Icon(
+                                    LineIcons.chevronRight,
+                                    size: 35,
+                                    color: kPrimaryColorDark,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  'See All',
+                                  style:
+                                      TextStyle(color: kPrimaryTextColorDark),
                                 ),
                               ],
                             ),
-                          ),
+                          )
                         ],
                       ),
                     ),
-                    LeftBorderCard(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Expenses',
-                            style: TextStyle(
-                              color: kDarkTextColorB,
-                              fontSize: 24,
-                            ),
-                          ),
-                          Container(
-                            child: SfCircularChart(
-                              legend: Legend(
-                                alignment: ChartAlignment.far,
-                                isVisible: true,
-                                textStyle: TextStyle(
-                                  fontSize: 10,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: LeftBorderCard(
+                          child: SizedBox(
+                            height: 150,
+                            child: Column(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Rewards',
+                                  style: TextStyle(
+                                    color: kHeadTextColorDark,
+                                    fontSize: 24,
+                                  ),
                                 ),
-                              ),
-                              series: <CircularSeries>[
-                                PieSeries<ExpensesModel, String>(
-                                  dataSource: pieChartData,
-                                  xValueMapper: (ExpensesModel data, _) =>
-                                      data.category,
-                                  yValueMapper: (ExpensesModel data, _) =>
-                                      data.amount,
-                                  pointRadiusMapper: (ExpensesModel data, _) =>
-                                      data.size,
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 16.0),
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.baseline,
+                                      textBaseline: TextBaseline.alphabetic,
+                                      children: [
+                                        Text(
+                                          '$currencySymbol',
+                                          style: TextStyle(
+                                            color: kPrimaryTextColorDark,
+                                            fontSize: 25,
+                                          ),
+                                        ),
+                                        Text(
+                                          '1,205',
+                                          style: TextStyle(
+                                            color: kPrimaryTextColorDark,
+                                            fontSize: 35,
+                                          ),
+                                        ),
+                                        Text(
+                                          '.50',
+                                          style: TextStyle(
+                                            color: kPrimaryTextColorDark,
+                                            fontSize: 20,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      right: 16.0, bottom: 10),
+                                  child: Center(
+                                    child: Text(
+                                      'Rewards Earned',
+                                      style: TextStyle(
+                                        color: kSecondaryTextColorDark,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ),
                                 )
                               ],
                             ),
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                    Container(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 25,
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Text(
-                              quote.quote,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: kDarkTextColor2,
-                                fontSize: 16,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                right: 8.0,
-                                bottom: 8.0,
-                              ),
-                              child: Text(
-                                '- ${quote.author}',
-                                style: TextStyle(
-                                  color: kDarkTextColor2,
-                                  fontSize: 14,
+                      Expanded(
+                        flex: 2,
+                        child: LeftBorderCard(
+                          child: SizedBox(
+                            height: 150,
+                            child: Column(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Bills',
+                                  style: TextStyle(
+                                    color: kHeadTextColorDark,
+                                    fontSize: 24,
+                                  ),
                                 ),
-                                textAlign: TextAlign.end,
-                              ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 16.0),
+                                  child: Center(
+                                    child: Text(
+                                      '3',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: kPrimaryTextColorDark,
+                                        fontSize: 48,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    right: 16.0,
+                                    bottom: 10,
+                                  ),
+                                  child: Center(
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          'bills due',
+                                          style: TextStyle(
+                                            color: kSecondaryTextColorDark,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                        Text(
+                                          'this week',
+                                          style: TextStyle(
+                                            color: kSecondaryTextColorDark,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                        ],
+                        ),
                       ),
+                    ],
+                  ),
+                  LeftBorderCard(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'I&E Overview',
+                          style: TextStyle(
+                            color: kHeadTextColorDark,
+                            fontSize: 24,
+                          ),
+                        ),
+                        Container(
+                          child: SfCartesianChart(
+                            palette: [
+                              kPositiveColorDark,
+                              kNegativeColorDark,
+                            ],
+                            plotAreaBorderColor: Colors.transparent,
+                            primaryXAxis: CategoryAxis(
+                              isVisible: true,
+                              axisLine: AxisLine(
+                                color: Colors.transparent,
+                              ),
+                              majorGridLines: MajorGridLines(
+                                color: Colors.transparent,
+                              ),
+                              minorGridLines: MinorGridLines(
+                                color: Colors.transparent,
+                              ),
+                              majorTickLines: MajorTickLines(
+                                color: Colors.transparent,
+                              ),
+                            ),
+                            primaryYAxis: NumericAxis(
+                              isVisible: false,
+                            ),
+                            series: <CartesianSeries>[
+                              ColumnSeries<IncomeExpenditureModel, String>(
+                                dataSource: barChartData,
+                                xValueMapper:
+                                    (IncomeExpenditureModel data, _) =>
+                                        data.month,
+                                yValueMapper:
+                                    (IncomeExpenditureModel data, _) =>
+                                        data.income,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10),
+                                  topRight: Radius.circular(10),
+                                ),
+                                spacing: 0.2,
+                              ),
+                              ColumnSeries<IncomeExpenditureModel, String>(
+                                dataSource: barChartData,
+                                xValueMapper:
+                                    (IncomeExpenditureModel data, _) =>
+                                        data.month,
+                                yValueMapper:
+                                    (IncomeExpenditureModel data, _) =>
+                                        data.expenditure,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10),
+                                  topRight: Radius.circular(10),
+                                ),
+                                spacing: 0.2,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  LeftBorderCard(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Expenses',
+                          style: TextStyle(
+                            color: kHeadTextColorDark,
+                            fontSize: 24,
+                          ),
+                        ),
+                        Container(
+                          child: SfCircularChart(
+                            legend: Legend(
+                              alignment: ChartAlignment.far,
+                              isVisible: true,
+                              textStyle: TextStyle(
+                                fontSize: 10,
+                              ),
+                            ),
+                            series: <CircularSeries>[
+                              PieSeries<ExpensesModel, String>(
+                                dataSource: pieChartData,
+                                xValueMapper: (ExpensesModel data, _) =>
+                                    data.category,
+                                yValueMapper: (ExpensesModel data, _) =>
+                                    data.amount,
+                                pointRadiusMapper: (ExpensesModel data, _) =>
+                                    data.size,
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 25,
+                        ),
+                        Padding(
+                          padding:
+                              const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            quote.quote,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: kSecondaryTextColorDark,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              right: 8.0,
+                              bottom: 8.0,
+                            ),
+                            child: Text(
+                              '- ${quote.author}',
+                              style: TextStyle(
+                                color: kSecondaryTextColorDark,
+                                fontSize: 14,
+                              ),
+                              textAlign: TextAlign.end,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           );
@@ -615,13 +624,16 @@ class SmallProfileCard extends StatelessWidget {
             //   radius: 35,
             //   backgroundImage: image,
             // ),
-            ProfileImageWidget(photoUrl: userInfo.dpurl, radius: 35),
+            ProfileImageWidget(
+              photoUrl: userInfo.dpurl,
+              radius: 35,
+            ),
             SizedBox(
               height: 5,
             ),
             Text(
               userInfo.firstname,
-              style: TextStyle(color: kDarkTextColor2),
+              style: TextStyle(color: kSecondaryTextColorDark),
             ),
           ],
         ),
@@ -641,7 +653,7 @@ class LeftBorderCard extends StatelessWidget {
       padding: const EdgeInsets.all(7.0),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: kCardColorDark,
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(20.0),
           boxShadow: [
@@ -657,7 +669,7 @@ class LeftBorderCard extends StatelessWidget {
             border: Border(
               left: BorderSide(
                 width: 4.0,
-                color: kDarkTextColorB,
+                color: kPrimaryColorDark,
               ),
             ),
           ),

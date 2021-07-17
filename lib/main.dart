@@ -15,12 +15,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        fontFamily: 'Nunito',
         primarySwatch: Colors.orange,
-        accentColor: Colors.orangeAccent,
-        backgroundColor: kDarkBackground,
+        accentColor: kAccentColorDark,
+        backgroundColor: kBackgroundColorDark,
         brightness: Brightness.dark,
       ),
       home: HomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

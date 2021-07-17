@@ -1,12 +1,11 @@
-import 'package:basic_banking_app/screens/secondary_screens/ProfilePopScreen.dart';
 import 'package:flutter/material.dart';
-
-import 'package:progress_indicators/progress_indicators.dart';
 
 import 'package:basic_banking_app/constants/colors.dart';
 import 'package:basic_banking_app/models/CustomerModel.dart';
+import 'package:basic_banking_app/screens/secondary_screens/ProfilePopScreen.dart';
 import 'package:basic_banking_app/utils/Database.dart';
 import 'package:basic_banking_app/widgets/CustomerCard.dart';
+import 'package:basic_banking_app/widgets/JumpingDots.dart';
 
 class AllUsersScreen extends StatefulWidget {
   const AllUsersScreen({Key? key}) : super(key: key);
@@ -21,12 +20,6 @@ class _AllUsersScreenState extends State<AllUsersScreen> {
     return Container(
       child: Column(
         children: [
-          MaterialButton(
-            onPressed: () {
-              DatabaseHelper.instance.deleteDatabase();
-            },
-            color: kDarkTextColorB,
-          ),
           Expanded(
             child: FutureBuilder<List<CustomerInfo>>(
               future: DatabaseHelper.instance.getCustomers('davidbeckham'),
@@ -38,7 +31,7 @@ class _AllUsersScreenState extends State<AllUsersScreen> {
                   return Center(
                     child: JumpingDotsProgressIndicator(
                       fontSize: 60.0,
-                      color: kDarkTextColorB,
+                      color: kPrimaryColorDark,
                       milliseconds: 200,
                       numberOfDots: 5,
                     ),

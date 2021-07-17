@@ -1,15 +1,15 @@
 import 'dart:async';
-
-import 'package:basic_banking_app/constants/data.dart';
-import 'package:basic_banking_app/utils/Database.dart';
 import 'package:flutter/material.dart';
 
-import 'package:progress_indicators/progress_indicators.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:basic_banking_app/constants/colors.dart';
+import 'package:basic_banking_app/constants/data.dart';
 import 'package:basic_banking_app/screens/landingScreen.dart';
 import 'package:basic_banking_app/screens/loginScreen.dart';
+import 'package:basic_banking_app/utils/Database.dart';
+import 'package:basic_banking_app/widgets/JumpingDots.dart';
+
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -56,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kDarkBackground,
+      backgroundColor: kBackgroundColorDark,
       body: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -84,14 +84,14 @@ class _SplashScreenState extends State<SplashScreen> {
                       Text(
                         'MyBank',
                         style: TextStyle(
-                          color: kDarkTextColorB,
+                          color: kHeadTextColorDark,
                           fontSize: 40,
                         ),
                       ),
                       Text(
                         'App',
                         style: TextStyle(
-                          color: kDarkTextColor1,
+                          color: kPrimaryTextColorDark,
                           fontSize: 40,
                         ),
                       ),
@@ -103,7 +103,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   Text(
                     'Manage all your expenses at one place',
                     style: TextStyle(
-                      color: kDarkTextColor1,
+                      color: kPrimaryTextColorDark,
                       fontSize: 16,
                     ),
                     textAlign: TextAlign.center,
@@ -116,7 +116,7 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Center(
               child: JumpingDotsProgressIndicator(
                 fontSize: 60.0,
-                color: kDarkTextColorB,
+                color: kPrimaryColorDark,
                 milliseconds: 200,
                 numberOfDots: 5,
               ),
@@ -125,8 +125,8 @@ class _SplashScreenState extends State<SplashScreen> {
           Expanded(
             child: Center(
               child: Text(
-                'eNeMKreates',
-                style: TextStyle(color: kDarkTextColor2),
+                'Made by Nityasmit Mallick',
+                style: TextStyle(color: kSecondaryTextColorDark),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -135,4 +135,5 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
+  
 }

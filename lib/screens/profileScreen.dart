@@ -1,11 +1,13 @@
+import 'package:flutter/material.dart';
+
 import 'package:basic_banking_app/constants/colors.dart';
 import 'package:basic_banking_app/constants/data.dart';
 import 'package:basic_banking_app/models/CustomerModel.dart';
 import 'package:basic_banking_app/utils/Database.dart';
+import 'package:basic_banking_app/widgets/JumpingDots.dart';
 import 'package:basic_banking_app/widgets/ProfileImageWidget.dart';
-import 'package:flutter/material.dart';
+
 import 'package:line_icons/line_icons.dart';
-import 'package:progress_indicators/progress_indicators.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -29,7 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             return Center(
               child: JumpingDotsProgressIndicator(
                 fontSize: 60.0,
-                color: kDarkTextColorB,
+                color: kPrimaryColorDark,
                 milliseconds: 200,
                 numberOfDots: 5,
               ),
@@ -48,6 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onPressed: () {},
                       child: Icon(
                         LineIcons.edit,
+                        color: kPrimaryColorDark,
                         size: 30,
                       ),
                     ),
@@ -58,6 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onPressed: () {},
                       child: Icon(
                         LineIcons.cog,
+                        color: kPrimaryColorDark,
                         size: 30,
                       ),
                     ),
@@ -69,7 +73,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 8.0),
                   decoration: BoxDecoration(
-                    color: Colors.orangeAccent,
+                    color: kAccentColorDark,
                     shape: BoxShape.circle,
                   ),
                   child: ProfileImageWidget(
@@ -88,21 +92,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Text(
                       '${userInfo.data!.designation} ',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: kPrimaryTextColorDark,
                         fontSize: 24,
                       ),
                     ),
                     Text(
                       '${userInfo.data!.firstname} ',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: kPrimaryTextColorDark,
                         fontSize: 36,
                       ),
                     ),
                     Text(
                       '${userInfo.data!.lastname}',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: kPrimaryTextColorDark,
                         fontSize: 36,
                       ),
                     ),
@@ -114,7 +118,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Text(
                   userInfo.data!.phone,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: kPrimaryTextColorDark,
                     fontSize: 26,
                   ),
                 ),
@@ -124,7 +128,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Text(
                   userInfo.data!.id,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: kPrimaryTextColorDark,
                     fontSize: 20,
                     fontStyle: FontStyle.italic,
                   ),
@@ -136,7 +140,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   data: userInfo.data!.id,
                   version: QrVersions.auto,
                   size: 200,
-                  foregroundColor: Colors.white,
+                  foregroundColor: kPrimaryTextColorDark,
                   embeddedImage: AssetImage('assets/images/Logo.png'),
                   embeddedImageStyle: QrEmbeddedImageStyle(),
                 ),
@@ -146,12 +150,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Column(
                   children: [
                     Text(
-                      'Made by eNeMKreates',
-                      style: TextStyle(color: kDarkTextColor2),
+                      'Made by Nityasmit Mallick',
+                      style: TextStyle(color: kSecondaryTextColorDark),
                     ),
                     Text(
                       'Ver 1.0.0',
-                      style: TextStyle(color: kDarkTextColor2),
+                      style: TextStyle(color: kSecondaryTextColorDark),
                     ),
                   ],
                 ),

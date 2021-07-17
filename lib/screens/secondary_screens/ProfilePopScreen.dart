@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'package:basic_banking_app/constants/colors.dart';
 import 'package:basic_banking_app/models/CustomerModel.dart';
 import 'package:basic_banking_app/models/TransactionModel.dart';
@@ -5,11 +7,11 @@ import 'package:basic_banking_app/screens/secondary_screens/GetHelpScreen.dart';
 import 'package:basic_banking_app/screens/secondary_screens/SendFeedbackScreen.dart';
 import 'package:basic_banking_app/utils/Database.dart';
 import 'package:basic_banking_app/widgets/AddTxBtn.dart';
+import 'package:basic_banking_app/widgets/JumpingDots.dart';
 import 'package:basic_banking_app/widgets/ProfileImageWidget.dart';
 import 'package:basic_banking_app/widgets/transactionCard.dart';
-import 'package:flutter/material.dart';
+
 import 'package:line_icons/line_icons.dart';
-import 'package:progress_indicators/progress_indicators.dart';
 
 class ProfilePopScreen extends StatefulWidget {
   const ProfilePopScreen({required this.user, Key? key}) : super(key: key);
@@ -27,16 +29,16 @@ class _ProfilePopScreenState extends State<ProfilePopScreen> {
     int refreshCount = 1;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: kDarkBackground,
+      backgroundColor: kBackgroundColorDark,
       appBar: AppBar(
         iconTheme: IconThemeData(
-          color: kDarkTextColorB,
+          color: kPrimaryColorDark,
         ),
         elevation: 4,
-        backgroundColor: Colors.black,
+        backgroundColor: kNavBarColorDark,
         actions: [
           PopupMenuButton<String>(
-            color: Color(0xFF212024),
+            color: kMenuBarColorDark,
             elevation: 16,
             onSelected: (String value) {
               switch (value) {
@@ -94,7 +96,7 @@ class _ProfilePopScreenState extends State<ProfilePopScreen> {
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 8.0),
                       decoration: BoxDecoration(
-                        color: Colors.orangeAccent,
+                        color: kAccentColorDark,
                         shape: BoxShape.circle,
                       ),
                       child: ProfileImageWidget(
@@ -113,21 +115,21 @@ class _ProfilePopScreenState extends State<ProfilePopScreen> {
                         Text(
                           '${user.designation} ',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: kPrimaryTextColorDark,
                             fontSize: 24,
                           ),
                         ),
                         Text(
                           '${user.firstname} ',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: kPrimaryTextColorDark,
                             fontSize: 36,
                           ),
                         ),
                         Text(
                           '${user.lastname}',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: kPrimaryTextColorDark,
                             fontSize: 36,
                           ),
                         ),
@@ -139,7 +141,7 @@ class _ProfilePopScreenState extends State<ProfilePopScreen> {
                     Text(
                       user.phone,
                       style: TextStyle(
-                        color: Colors.white,
+                        color: kPrimaryTextColorDark,
                         fontSize: 26,
                       ),
                     ),
@@ -159,14 +161,14 @@ class _ProfilePopScreenState extends State<ProfilePopScreen> {
                               Text(
                                 '${user.id}',
                                 style: TextStyle(
-                                  color: kDarkTextColor2,
+                                  color: kSecondaryTextColorDark,
                                   fontSize: 16,
                                 ),
                               ),
                               Text(
                                 'Previous Transactions',
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: kPrimaryTextColorDark,
                                   fontSize: 18,
                                 ),
                               ),
@@ -184,7 +186,7 @@ class _ProfilePopScreenState extends State<ProfilePopScreen> {
                               },
                               child: Icon(
                                 LineIcons.syncIcon,
-                                color: Colors.white,
+                                color: kPrimaryTextColorDark,
                               ),
                             ),
                           ),
@@ -196,7 +198,7 @@ class _ProfilePopScreenState extends State<ProfilePopScreen> {
                       child: Container(
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: kDarkTextColor2,
+                            color: kSecondaryTextColorDark,
                           ),
                         ),
                       ),
@@ -218,7 +220,7 @@ class _ProfilePopScreenState extends State<ProfilePopScreen> {
                               return Center(
                                 child: JumpingDotsProgressIndicator(
                                   fontSize: 60.0,
-                                  color: kDarkTextColorB,
+                                  color: kPrimaryColorDark,
                                   milliseconds: 200,
                                   numberOfDots: 5,
                                 ),
@@ -232,7 +234,9 @@ class _ProfilePopScreenState extends State<ProfilePopScreen> {
                                       'No Previous Transactions',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                          color: kDarkTextColor2, fontSize: 35),
+                                        color: kSecondaryTextColorDark,
+                                        fontSize: 35,
+                                      ),
                                     ),
                                   ),
                                 );

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/material.dart';
 
 import 'package:basic_banking_app/constants/colors.dart';
 import 'package:basic_banking_app/constants/data.dart';
@@ -10,11 +11,11 @@ import 'package:basic_banking_app/screens/secondary_screens/RaiseDisputeScreen.d
 import 'package:basic_banking_app/screens/secondary_screens/SendFeedbackScreen.dart';
 import 'package:basic_banking_app/utils/Database.dart';
 import 'package:basic_banking_app/utils/TimeFormatter.dart';
+import 'package:basic_banking_app/widgets/JumpingDots.dart';
 import 'package:basic_banking_app/widgets/ProfileImageWidget.dart';
-import 'package:flutter/material.dart';
+
 import 'package:line_icons/line_icons.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:progress_indicators/progress_indicators.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -49,7 +50,7 @@ class _TransactionPopScreenState extends State<TransactionPopScreen> {
       isExpense = false;
     }
     return Scaffold(
-      backgroundColor: kDarkBackground,
+      backgroundColor: kBackgroundColorDark,
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(
           bottom: 8.0,
@@ -71,7 +72,7 @@ class _TransactionPopScreenState extends State<TransactionPopScreen> {
                       ),
                     );
                   },
-                  color: kDarkTextColorB,
+                  color: kPrimaryColorDark,
                   elevation: 6,
                   padding: EdgeInsets.all(8.0),
                   shape: RoundedRectangleBorder(
@@ -103,7 +104,7 @@ class _TransactionPopScreenState extends State<TransactionPopScreen> {
                       ),
                     );
                   },
-                  color: kDarkTextColorB,
+                  color: kPrimaryColorDark,
                   elevation: 6,
                   padding: EdgeInsets.all(8.0),
                   shape: RoundedRectangleBorder(
@@ -129,10 +130,10 @@ class _TransactionPopScreenState extends State<TransactionPopScreen> {
       ),
       appBar: AppBar(
         iconTheme: IconThemeData(
-          color: kDarkTextColorB,
+          color: kPrimaryColorDark,
         ),
         elevation: 4,
-        backgroundColor: Colors.black,
+        backgroundColor: kNavBarColorDark,
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -142,12 +143,12 @@ class _TransactionPopScreenState extends State<TransactionPopScreen> {
               onPressed: takeScreenshot,
               child: Icon(
                 LineIcons.share,
-                color: kDarkTextColorB,
+                color: kHeadTextColorDark,
               ),
             ),
           ),
           PopupMenuButton<String>(
-            color: Color(0xFF212024),
+            color: kMenuBarColorDark,
             elevation: 16,
             onSelected: (String value) {
               switch (value) {
@@ -201,7 +202,7 @@ class _TransactionPopScreenState extends State<TransactionPopScreen> {
             return Center(
               child: JumpingDotsProgressIndicator(
                 fontSize: 60.0,
-                color: kDarkTextColorB,
+                color: kPrimaryColorDark,
                 milliseconds: 200,
                 numberOfDots: 5,
               ),
@@ -212,7 +213,7 @@ class _TransactionPopScreenState extends State<TransactionPopScreen> {
               controller: _screenshotController,
               child: SafeArea(
                 child: Container(
-                  color: kDarkBackground,
+                  color: kBackgroundColorDark,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -223,7 +224,7 @@ class _TransactionPopScreenState extends State<TransactionPopScreen> {
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 8.0),
                             decoration: BoxDecoration(
-                              color: Colors.orangeAccent,
+                              color: kAccentColorDark,
                               shape: BoxShape.circle,
                             ),
                             child: InkWell(
@@ -253,28 +254,28 @@ class _TransactionPopScreenState extends State<TransactionPopScreen> {
                               Text(
                                 isExpense ? 'To: ' : 'From: ',
                                 style: TextStyle(
-                                  color: kDarkTextColor2,
+                                  color: kSecondaryTextColorDark,
                                   fontSize: 16,
                                 ),
                               ),
                               Text(
                                 '${userInfo!.designation} ',
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: kPrimaryTextColorDark,
                                   fontSize: 16,
                                 ),
                               ),
                               Text(
                                 '${userInfo!.firstname} ',
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: kPrimaryTextColorDark,
                                   fontSize: 22,
                                 ),
                               ),
                               Text(
                                 '${userInfo!.lastname}',
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: kPrimaryTextColorDark,
                                   fontSize: 22,
                                 ),
                               ),
@@ -283,7 +284,7 @@ class _TransactionPopScreenState extends State<TransactionPopScreen> {
                           Text(
                             userInfo!.phone,
                             style: TextStyle(
-                              color: Colors.white,
+                              color: kPrimaryTextColorDark,
                               fontSize: 20,
                             ),
                           ),
@@ -293,7 +294,7 @@ class _TransactionPopScreenState extends State<TransactionPopScreen> {
                           Text(
                             getTransactionTimeDetailed(transaction.date),
                             style: TextStyle(
-                              color: kDarkTextColor2,
+                              color: kSecondaryTextColorDark,
                               fontSize: 16,
                             ),
                           ),
@@ -310,21 +311,21 @@ class _TransactionPopScreenState extends State<TransactionPopScreen> {
                           Text(
                             '$currencySymbol ',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: kPrimaryTextColorDark,
                               fontSize: 40,
                             ),
                           ),
                           Text(
                             '$amountInt',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: kPrimaryTextColorDark,
                               fontSize: 56,
                             ),
                           ),
                           Text(
                             '.$amountDec',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: kPrimaryTextColorDark,
                               fontSize: 36,
                             ),
                           ),
@@ -337,11 +338,14 @@ class _TransactionPopScreenState extends State<TransactionPopScreen> {
                         padding: const EdgeInsets.all(10.0),
                         child: Container(
                           decoration: BoxDecoration(
-                              color: Colors.black38,
-                              shape: BoxShape.rectangle,
-                              borderRadius: BorderRadius.circular(20.0),
-                              border:
-                                  Border.all(width: 2, color: Colors.white54)),
+                            color: kOverlayCardColorDark,
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(20.0),
+                            border: Border.all(
+                              width: 2,
+                              color: kOverlayCardBorderColorDark,
+                            ),
+                          ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 25),
@@ -358,7 +362,7 @@ class _TransactionPopScreenState extends State<TransactionPopScreen> {
                                   '${transaction.txId}',
                                   style: TextStyle(
                                     fontSize: 16,
-                                    color: kDarkTextColor2,
+                                    color: kSecondaryTextColorDark,
                                   ),
                                 ),
                                 SizedBox(
@@ -399,7 +403,7 @@ class _TransactionPopScreenState extends State<TransactionPopScreen> {
                                   '${userInfo!.id}',
                                   style: TextStyle(
                                     fontSize: 16,
-                                    color: kDarkTextColor2,
+                                    color: kSecondaryTextColorDark,
                                   ),
                                 ),
                                 SizedBox(
@@ -440,7 +444,7 @@ class _TransactionPopScreenState extends State<TransactionPopScreen> {
                                   '$username',
                                   style: TextStyle(
                                     fontSize: 16,
-                                    color: kDarkTextColor2,
+                                    color: kSecondaryTextColorDark,
                                   ),
                                 ),
                               ],
@@ -454,21 +458,21 @@ class _TransactionPopScreenState extends State<TransactionPopScreen> {
                           Text(
                             'Powered by ',
                             style: TextStyle(
-                              color: kDarkTextColor2,
+                              color: kSecondaryTextColorDark,
                               fontSize: 15,
                             ),
                           ),
                           Text(
                             'MyBank',
                             style: TextStyle(
-                              color: kDarkTextColorB,
+                              color: kHeadTextColorDark,
                               fontSize: 15,
                             ),
                           ),
                           Text(
                             'App',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: kPrimaryTextColorDark,
                               fontSize: 15,
                             ),
                           ),

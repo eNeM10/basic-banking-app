@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:progress_indicators/progress_indicators.dart';
-
 import 'package:basic_banking_app/constants/colors.dart';
 import 'package:basic_banking_app/models/TransactionModel.dart';
 import 'package:basic_banking_app/utils/Database.dart';
+import 'package:basic_banking_app/widgets/JumpingDots.dart';
 import 'package:basic_banking_app/widgets/transactionCard.dart';
 
 class TransactionHistoryScreen extends StatefulWidget {
@@ -21,12 +20,6 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
     return Container(
       child: Column(
         children: [
-          MaterialButton(
-            onPressed: () {
-              DatabaseHelper.instance.deleteDatabase();
-            },
-            color: kDarkTextColorB,
-          ),
           Expanded(
             child: FutureBuilder<List<TransactionModel>>(
               future: DatabaseHelper.instance.getTransactions('davidbeckham'),
@@ -36,7 +29,7 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
                   return Center(
                     child: JumpingDotsProgressIndicator(
                       fontSize: 60.0,
-                      color: kDarkTextColorB,
+                      color: kPrimaryColorDark,
                       milliseconds: 200,
                       numberOfDots: 5,
                     ),
@@ -46,7 +39,10 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
                     return Center(
                       child: Text(
                         'No Transactions in List',
-                        style: TextStyle(color: Colors.white, fontSize: 60),
+                        style: TextStyle(
+                          color: kSecondaryTextColorDark,
+                          fontSize: 60,
+                        ),
                       ),
                     );
                   } else {

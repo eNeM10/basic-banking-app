@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
+
 import 'package:basic_banking_app/constants/colors.dart';
 import 'package:basic_banking_app/utils/CustomRectTween.dart';
 import 'package:basic_banking_app/utils/PopDialogRoute.dart';
 import 'package:basic_banking_app/widgets/AddTxScreens.dart';
-import 'package:flutter/material.dart';
+
 import 'package:line_icons/line_icons.dart';
 
 class AddTxButton extends StatelessWidget {
@@ -36,7 +38,7 @@ class AddTxButton extends StatelessWidget {
             ),
           );
         },
-        color: kDarkTextColorB,
+        color: kPrimaryColorDark,
         elevation: 6,
         padding: EdgeInsets.all(8.0),
         shape: RoundedRectangleBorder(
@@ -112,8 +114,8 @@ class _AddTxPopupCard extends StatelessWidget {
                   return CustomRectTween(begin: begin, end: end);
                 },
                 child: Material(
-                  color: Colors.black,
-                  shadowColor: kDarkTextColorB,
+                  color: kCardColorDark,
+                  shadowColor: kPrimaryColorDark,
                   elevation: 1,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),

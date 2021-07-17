@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kDarkBackground,
+      backgroundColor: kBackgroundColorDark,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -52,14 +52,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text(
                         'MyBank',
                         style: TextStyle(
-                          color: kDarkTextColorB,
+                          color: kHeadTextColorDark,
                           fontSize: 36,
                         ),
                       ),
                       Text(
                         'App',
                         style: TextStyle(
-                          color: kDarkTextColor1,
+                          color: kPrimaryTextColorDark,
                           fontSize: 36,
                         ),
                       ),
@@ -76,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  color: Colors.black,
+                  color: kCardColorDark,
                   child: Column(
                     children: [
                       Align(
@@ -89,14 +89,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               Text(
                                 'Welcome',
                                 style: TextStyle(
-                                  color: kDarkTextColorB,
+                                  color: kHeadTextColorDark,
                                   fontSize: 36,
                                 ),
                               ),
                               Text(
                                 'Sign in to continue!',
                                 style: TextStyle(
-                                  color: kDarkTextColor1,
+                                  color: kPrimaryColorDark,
                                   fontSize: 22,
                                 ),
                               ),
@@ -112,24 +112,24 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Container(
                           padding: EdgeInsets.all(6.0),
                           decoration: BoxDecoration(
-                            color: Color(0xFF383838),
+                            color: kTextFieldBoxColorDark,
                             borderRadius: BorderRadius.circular(15.0),
                           ),
                           child: TextField(
                             keyboardType: TextInputType.phone,
                             style: TextStyle(
-                              color: Colors.white,
+                              color: kPrimaryTextColorDark,
                               fontSize: 18,
                             ),
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               prefixIcon: Icon(
                                 LineIcons.phone,
-                                color: kDarkTextColorB,
+                                color: kPrimaryColorDark,
                               ),
                               hintText: 'Enter phone number',
                               hintStyle: TextStyle(
-                                color: Colors.grey,
+                                color: kTextFieldHintColorDark,
                                 fontSize: 18.0,
                               ),
                             ),
@@ -144,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Container(
                           padding: EdgeInsets.all(6.0),
                           decoration: BoxDecoration(
-                            color: Color(0xFF383838),
+                            color: kTextFieldBoxColorDark,
                             borderRadius: BorderRadius.circular(15.0),
                           ),
                           child: TextField(
@@ -152,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             enableSuggestions: false,
                             autocorrect: false,
                             style: TextStyle(
-                              color: Colors.white,
+                              color: kPrimaryTextColorDark,
                               fontSize: 18,
                             ),
                             decoration: InputDecoration(
@@ -166,17 +166,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                   _isHidden
                                       ? LineIcons.eye
                                       : LineIcons.eyeSlash,
-                                  color: kDarkTextColorB,
+                                  color: kPrimaryColorDark,
                                 ),
                               ),
                               border: InputBorder.none,
                               prefixIcon: Icon(
                                 LineIcons.key,
-                                color: kDarkTextColorB,
+                                color: kPrimaryColorDark,
                               ),
                               hintText: 'Enter password',
                               hintStyle: TextStyle(
-                                color: Colors.grey,
+                                color: kTextFieldHintColorDark,
                                 fontSize: 18.0,
                               ),
                             ),
@@ -190,7 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () {
                           navigate();
                         },
-                        color: kDarkTextColorB,
+                        color: kPrimaryColorDark,
                         height: 50,
                         minWidth: 150,
                         shape: RoundedRectangleBorder(
@@ -199,7 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           'Login',
                           style: TextStyle(
-                            color: kDarkTextColor1,
+                            color: kPrimaryTextColorDark,
                             fontSize: 24,
                           ),
                         ),
@@ -213,7 +213,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           'Sign Up',
                           style: TextStyle(
-                            color: kDarkTextColor1,
+                            color: kPrimaryTextColorDark,
                             fontSize: 16,
                           ),
                         ),

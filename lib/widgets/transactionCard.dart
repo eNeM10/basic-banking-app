@@ -1,18 +1,17 @@
-import 'package:basic_banking_app/models/CustomerModel.dart';
-import 'package:basic_banking_app/screens/secondary_screens/ProfilePopScreen.dart';
-import 'package:basic_banking_app/screens/secondary_screens/TransactionPopScreen.dart';
-import 'package:basic_banking_app/utils/Database.dart';
 import 'package:flutter/material.dart';
-
-import 'package:line_icons/line_icons.dart';
 
 import 'package:basic_banking_app/constants/colors.dart';
 import 'package:basic_banking_app/constants/data.dart';
+import 'package:basic_banking_app/models/CustomerModel.dart';
 import 'package:basic_banking_app/models/TransactionModel.dart';
+import 'package:basic_banking_app/screens/secondary_screens/ProfilePopScreen.dart';
+import 'package:basic_banking_app/screens/secondary_screens/TransactionPopScreen.dart';
+import 'package:basic_banking_app/utils/Database.dart';
 import 'package:basic_banking_app/utils/TimeFormatter.dart';
-import 'package:progress_indicators/progress_indicators.dart';
+import 'package:basic_banking_app/widgets/JumpingDots.dart';
+import 'package:basic_banking_app/widgets/ProfileImageWidget.dart';
 
-import 'ProfileImageWidget.dart';
+import 'package:line_icons/line_icons.dart';
 
 // ignore: must_be_immutable
 class TransactionCardWidget extends StatefulWidget {
@@ -53,7 +52,7 @@ class _TransactionCardWidgetState extends State<TransactionCardWidget> {
           return Center(
             child: JumpingDotsProgressIndicator(
               fontSize: 60.0,
-              color: kDarkTextColorB,
+              color: kPrimaryColorDark,
               milliseconds: 200,
               numberOfDots: 5,
             ),
@@ -77,7 +76,7 @@ class _TransactionCardWidgetState extends State<TransactionCardWidget> {
               },
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: kCardColorDark,
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(20.0),
                   boxShadow: [
@@ -98,7 +97,9 @@ class _TransactionCardWidgetState extends State<TransactionCardWidget> {
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 8.0),
                             decoration: BoxDecoration(
-                              color: isExpense ? kExpenseColor : kIncomeColor,
+                              color: isExpense
+                                  ? kNegativeColorDark
+                                  : kPositiveColorDark,
                               shape: BoxShape.circle,
                             ),
                             child: Icon(
@@ -106,7 +107,7 @@ class _TransactionCardWidgetState extends State<TransactionCardWidget> {
                                   ? LineIcons.arrowRight
                                   : LineIcons.arrowLeft,
                               size: 50,
-                              color: Colors.white,
+                              color: kPrimaryTextColorDark,
                             ),
                           ),
                           Padding(
@@ -180,7 +181,9 @@ class _TransactionCardWidgetState extends State<TransactionCardWidget> {
                                 Text(
                                   getTransactionTime(widget.transaction.date),
                                   style: TextStyle(
-                                      fontSize: 16, color: kDarkTextColor2),
+                                    fontSize: 16,
+                                    color: kSecondaryTextColorDark,
+                                  ),
                                 ),
                               ],
                             ),
@@ -192,7 +195,7 @@ class _TransactionCardWidgetState extends State<TransactionCardWidget> {
                           : Container(
                               padding: EdgeInsets.symmetric(horizontal: 8.0),
                               decoration: BoxDecoration(
-                                color: Colors.orangeAccent,
+                                color: kAccentColorDark,
                                 shape: BoxShape.circle,
                               ),
                               child: InkWell(

@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
+
 import 'package:basic_banking_app/constants/colors.dart';
 import 'package:basic_banking_app/constants/data.dart';
 import 'package:basic_banking_app/models/TransactionModel.dart';
 import 'package:basic_banking_app/utils/Database.dart';
-import 'package:flutter/material.dart';
+
 import 'package:lottie/lottie.dart';
 import 'package:uuid/uuid.dart';
 
@@ -37,11 +39,17 @@ class _SendMoneyCardState extends State<SendMoneyCard> {
           children: [
             Text(
               widget.isRequest ? 'Request Money From' : 'Send Money To',
-              style: TextStyle(color: kDarkTextColor2, fontSize: 18),
+              style: TextStyle(
+                color: kSecondaryTextColorDark,
+                fontSize: 18,
+              ),
             ),
             Text(
               '${widget.toName}',
-              style: TextStyle(color: Colors.white, fontSize: 36),
+              style: TextStyle(
+                color: kPrimaryTextColorDark,
+                fontSize: 36,
+              ),
             ),
             TextField(
               keyboardType: TextInputType.number,
@@ -55,12 +63,12 @@ class _SendMoneyCardState extends State<SendMoneyCard> {
                 border: InputBorder.none,
               ),
               style: TextStyle(
-                color: Colors.white,
+                color: kPrimaryTextColorDark,
                 fontSize: 48,
               ),
             ),
-            const Divider(
-              color: Colors.white,
+            Divider(
+              color: kPrimaryTextColorDark,
               thickness: 0.2,
             ),
             TextField(
@@ -76,8 +84,8 @@ class _SendMoneyCardState extends State<SendMoneyCard> {
               ),
               textInputAction: TextInputAction.done,
             ),
-            const Divider(
-              color: Colors.white,
+            Divider(
+              color: kPrimaryTextColorDark,
               thickness: 0.2,
             ),
             MaterialButton(
@@ -104,7 +112,7 @@ class _SendMoneyCardState extends State<SendMoneyCard> {
               child: Text(
                 widget.isRequest ? 'Request' : 'Send',
                 style: TextStyle(
-                  color: kDarkTextColorB,
+                  color: kHeadTextColorDark,
                   fontSize: 24,
                 ),
               ),
@@ -126,11 +134,14 @@ class _SendMoneyCardState extends State<SendMoneyCard> {
           children: [
             Text(
               widget.isRequest ? 'Request Money From' : 'Send Money To',
-              style: TextStyle(color: kDarkTextColor2, fontSize: 18),
+              style: TextStyle(
+                color: kSecondaryTextColorDark,
+                fontSize: 18,
+              ),
             ),
             Text(
               '${widget.toName}',
-              style: TextStyle(color: Colors.white, fontSize: 36),
+              style: TextStyle(color: kPrimaryTextColorDark, fontSize: 36),
             ),
             SizedBox(
               height: 40,
@@ -142,15 +153,24 @@ class _SendMoneyCardState extends State<SendMoneyCard> {
               children: [
                 Text(
                   '$currencySymbol',
-                  style: TextStyle(color: Colors.white, fontSize: 36),
+                  style: TextStyle(
+                    color: kPrimaryTextColorDark,
+                    fontSize: 36,
+                  ),
                 ),
                 Text(
                   '$amountInt',
-                  style: TextStyle(color: Colors.white, fontSize: 60),
+                  style: TextStyle(
+                    color: kPrimaryTextColorDark,
+                    fontSize: 60,
+                  ),
                 ),
                 Text(
                   '.$amountDec',
-                  style: TextStyle(color: Colors.white, fontSize: 36),
+                  style: TextStyle(
+                    color: kPrimaryTextColorDark,
+                    fontSize: 36,
+                  ),
                 ),
               ],
             ),
@@ -176,7 +196,7 @@ class _SendMoneyCardState extends State<SendMoneyCard> {
               child: Text(
                 'Confirm',
                 style: TextStyle(
-                  color: kDarkTextColorB,
+                  color: kHeadTextColorDark,
                   fontSize: 24,
                 ),
               ),
@@ -229,10 +249,10 @@ class _SendMoneyCardState extends State<SendMoneyCard> {
       date: DateTime.now(),
     );
     DatabaseHelper.instance.makeTransaction(tx);
-    print('Sent \$$amount to $toID');
+    // print('Sent \$$amount to $toID');
   }
 
   void sendRequest({required double amount, required String toID}) async {
-    print('Request \$$amount to $toID');
+    // print('Request \$$amount to $toID');
   }
 }

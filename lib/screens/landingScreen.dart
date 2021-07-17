@@ -8,6 +8,7 @@ import 'package:basic_banking_app/screens/allUsersScreen.dart';
 import 'package:basic_banking_app/screens/homeScreen.dart';
 import 'package:basic_banking_app/screens/profileScreen.dart';
 import 'package:basic_banking_app/screens/transactionHistoryScreen.dart';
+import 'package:basic_banking_app/widgets/JumpingDots.dart';
 
 class LandingScreen extends StatefulWidget {
   const LandingScreen({required this.index});
@@ -22,7 +23,6 @@ class _LandingScreenState extends State<LandingScreen> {
 
   List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    // HomeScreen(toAllUsers: openAllUsersScreen,),
     AllUsersScreen(),
     TransactionHistoryScreen(),
     ProfileScreen(),
@@ -44,16 +44,21 @@ class _LandingScreenState extends State<LandingScreen> {
   Widget build(BuildContext context) {
     return loading
         ? Center(
-            child: CircularProgressIndicator(),
+            child: JumpingDotsProgressIndicator(
+              fontSize: 60.0,
+              color: kPrimaryColorDark,
+              milliseconds: 200,
+              numberOfDots: 5,
+            ),
           )
         : Scaffold(
-            backgroundColor: kDarkBackground,
+            backgroundColor: kBackgroundColorDark,
             body: SafeArea(
               child: _widgetOptions.elementAt(_selectedIndex),
             ),
             bottomNavigationBar: Container(
               decoration: BoxDecoration(
-                color: Colors.black,
+                color: kNavBarColorDark,
                 boxShadow: [
                   BoxShadow(
                     blurRadius: 10,
@@ -66,15 +71,15 @@ class _LandingScreenState extends State<LandingScreen> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
                   child: GNav(
-                    rippleColor: kDarkTextColorB,
-                    hoverColor: kDarkTextColorB,
+                    rippleColor: kPrimaryColorDark,
+                    hoverColor: kPrimaryColorDark,
                     gap: 8,
-                    activeColor: Colors.white,
+                    activeColor: kPrimaryTextColorDark,
                     iconSize: 24,
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                     duration: Duration(milliseconds: 200),
-                    tabBackgroundColor: kDarkTextColorB,
-                    color: Colors.white,
+                    tabBackgroundColor: kPrimaryColorDark,
+                    color: kPrimaryTextColorDark,
                     tabs: [
                       GButton(
                         icon: LineIcons.home,
